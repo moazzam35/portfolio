@@ -1,0 +1,344 @@
+/* Animated Beam Wrapper */
+.animated-beam-wrapper {
+  width: 100%;
+  padding: 0px 0px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.98) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-beam-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(0, 0, 0, 0.1) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.animated-beam-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Beam Header */
+.beam-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.beam-header h2 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.beam-header p {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Beam Container */
+.beam-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding: 60px 30px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 350px;
+}
+
+/* Beam Grid — ALWAYS ROW (never column) */
+.beam-grid {
+  display: flex;
+  flex-direction: row; /* locked horizontal on all sizes */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  gap: 80px;
+  position: relative;
+  z-index: 10;
+}
+
+.beam-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.beam-column-center {
+  flex: 0 0 auto;
+}
+
+.beam-column-tech {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Circle Styling */
+.z-10 {
+  z-index: 10;
+}
+
+.flex {
+  display: flex;
+}
+
+.size-12 {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.shadow-\[0_0_20px_-12px_rgba\(0\,0\,0\,0\.8\)\] {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Circle Variants */
+.circle-figma {
+  width: 4rem;
+  height: 4rem;
+  background-color: #fff;
+  border: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* .circle-figma img {
+  padding: 20px 20px;
+} */
+.circle-person {
+  width: 5rem;
+  height: 5rem;
+  background-color: #fff;
+  /* background: transparent ; */
+  border: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.circle-person img {
+  /* width: 5rem;
+  height: 5rem; */
+  background-color: #fff;
+  /* padding: 26px; */
+
+}
+
+.circle-tech {
+  width: 3.9rem;
+  height: 3.9rem;
+  background: linear-gradient(
+    135deg,
+    hsla(0, 0%, 100%, 0.95) 0%,
+    rgba(249, 250, 251, 0.95) 100%
+  );
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+@media (max-width: 1024px) {
+  .beam-grid {
+    max-width: 800px;
+    gap: 60px;
+  }
+
+  .circle-person {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  .circle-figma {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .animated-beam-wrapper {
+    padding: 80px 16px;
+  }
+
+  .beam-header {
+    margin-bottom: 60px;
+  }
+
+  .beam-container {
+    padding: 40px 16px;
+    border-radius: 20px;
+    min-height: 280px;
+  }
+
+  /* STAY ROW — just tighten gap */
+  .beam-grid {
+    flex-direction: row; /* keep horizontal */
+    gap: 24px;
+    max-width: 100%;
+  }
+
+  .beam-column-tech {
+    gap: 10px;
+  }
+
+  .circle-person {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .circle-figma {
+    width: 3rem;
+    height: 3rem;
+  }
+  .circle-tech {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .size-12 {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-beam-wrapper {
+    padding: 60px 10px;
+  }
+
+  .beam-header {
+    margin-bottom: 40px;
+  }
+
+  .beam-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .beam-header p {
+    font-size: 0.9rem;
+  }
+
+  .beam-container {
+    padding: 28px 10px;
+    border-radius: 16px;
+    min-height: 240px;
+  }
+
+  /* STAY ROW */
+  .beam-grid {
+    flex-direction: row; /* keep horizontal */
+    gap: 14px;
+  }
+
+  .beam-column-tech {
+    gap: 7px;
+  }
+
+  .circle-person {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+  .circle-figma {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .circle-tech {
+    width: 2rem;
+    height: 2rem;
+  }
+  .size-12 {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  /* shrink padding inside circles on very small screens */
+  .p-3 {
+    padding: 0.4rem;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animated-beam-section > * {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* .circle-person {
+  animation: pulse 3s ease-in-out infinite;
+} */
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

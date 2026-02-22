@@ -60,10 +60,15 @@ body {
 .nav a {
   text-decoration: none;
   color: white;
-  font-size: 18px;
-  font-weight: 500;
+  font-weight: bold;
+  font-size: 24px;
+  /* font-weight: 500; */
   font-family: "Poppins", sans-serif;
   transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #00ff87;
 }
 
 .about-2 {
@@ -274,7 +279,235 @@ body {
   gap: 15px;
   align-items: center;
 }
+.hire-me-div button{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* ================================================================
+   ABOUT SECTION - COUNTER BADGES
+   ================================================================ */
 
+/* About image container needs relative positioning */
+.about-image {
+  position: relative;
+  /* Your existing styles stay here */
+}
+
+/* ────────────────────────────────────────────────────────────────
+   COUNTER BADGE BASE STYLES
+   ──────────────────────────────────────────────────────────────── */
+.counter-badge {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  min-width: 100px;
+  
+  /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  
+  /* Shadows for depth */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  
+  /* Animation */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  z-index: 10;
+}
+
+/* .counter-badge:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 40px rgba(139, 92, 246, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.15);
+} */
+
+/* ────────────────────────────────────────────────────────────────
+   COUNTER TEXT STYLES
+   ──────────────────────────────────────────────────────────────── */
+.counter-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+  
+  /* Gradient text */
+ background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Text shadow for depth */
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3));
+}
+
+.counter-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   BADGE POSITIONS
+   ──────────────────────────────────────────────────────────────── */
+
+/* Top Left - Projects */
+.badge-top-left {
+  top: -10px;
+  left: -20px;
+}
+
+/* Top Right - Clients */
+.badge-top-right {
+  top: 60px;
+  right: -30px;
+}
+
+/* Bottom - Experience */
+.badge-bottom {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.badge-bottom:hover {
+  transform: translateX(-50%) translateY(-4px) scale(1.05);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   RESPONSIVE DESIGN
+   ──────────────────────────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .counter-badge {
+    padding: 14px 20px;
+    min-width: 90px;
+  }
+  
+  .counter-value {
+    font-size: 1.75rem;
+  }
+  
+  .counter-label {
+    font-size: 0.7rem;
+  }
+  
+  .badge-top-left {
+    top: -8px;
+    left: -15px;
+  }
+  
+  .badge-top-right {
+    top: 50px;
+    right: -20px;
+  }
+  
+  .badge-bottom {
+    bottom: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .counter-badge {
+    padding: 12px 16px;
+    min-width: 80px;
+    border-radius: 12px;
+  }
+  
+  .counter-value {
+    font-size: 1.5rem;
+  }
+  
+  .counter-label {
+    font-size: 0.65rem;
+  }
+  
+  .badge-top-left {
+    top: -5px;
+    left: -10px;
+  }
+  
+  .badge-top-right {
+    top: 40px;
+    right: -15px;
+  }
+  
+  .badge-bottom {
+    bottom: 10px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .counter-badge {
+    padding: 10px 14px;
+    min-width: 70px;
+    border-radius: 10px;
+  }
+  
+  .counter-value {
+    font-size: 1.25rem;
+    margin-bottom: 2px;
+  }
+  
+  .counter-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+  
+  .badge-top-left {
+    top: 0;
+    left: -8px;
+  }
+  
+  .badge-top-right {
+    top: 30px;
+    right: -10px;
+  }
+  
+  .badge-bottom {
+    bottom: 5px;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   OPTIONAL: PULSING ANIMATION
+   ──────────────────────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 8px 32px rgba(139, 92, 246, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Uncomment to enable pulse animation */
+/*
+.counter-badge {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+*/
 @media (max-width: 1200px) {
   .main-about-2 {
     grid-template-columns: 450px 1fr;

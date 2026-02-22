@@ -6,13 +6,14 @@ import About from "./components/About";
 import "./App.css";
 import AOS from "aos";
 import Projects from "./components/projects";
+import { AnimatedBeamMultipleOutputDemo } from "./components/AnimatedBeam/animated-beam";
 import InfiniteScroll from "./components/iconscrool";
 import SkillProgress from "./components/circlepro";
 import UserChatsAndReviews from "./components/userreviews";
 import Footer from "./components/contact";
 
 
-        
+
 function App() {
   useEffect(() => {
     AOS.init({
@@ -28,11 +29,12 @@ function App() {
       <Hero />
       <About />
       <Projects />
+      <AnimatedBeamMultipleOutputDemo />
       <InfiniteScroll />
-      <SkillProgress  />
-      <UserChatsAndReviews/>
-      <Footer />   
-      </>
+      <SkillProgress />
+      <UserChatsAndReviews />
+      <Footer />
+    </>
   );
 }
 
