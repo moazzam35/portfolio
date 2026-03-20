@@ -30,9 +30,20 @@ function Projects() {
       demoLink: "https://moazzam35.github.io/country-cards",
       codeLink: "https://github.com/moazzam35/country-cards",
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    },{
+
+    
+      id: 3,
+      title: "CRUD Posts Manager",
+      description:
+        "A full-featured CRUD application built with React that fetches data from JSONPlaceholder API, supporting create, read, update, and delete operations with a clean responsive UI.",
+      tags: ["React", "REST API", "Axios", "Vite"],
+      demoLink: "https://moazzam35.github.io/crud/",
+      codeLink: "https://github.com/moazzam35/crud",
+      gradient: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)", 
     },
     {
-      id: 3,
+      id: 4,
       title: "Pokemon Data Explorer",
       description:
         "A dynamic Pokemon database that fetches data from Pokemon API, displaying comprehensive Pokemon information with advanced search and filter functionality.",
