@@ -38,19 +38,25 @@
 .beam-header {
   text-align: center;
   margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.beam-header h2 {
+.beam-header .split-text {
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: 700;
   color: #fff;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #00F5A0, #00D9F5, #7C3AED);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
 .beam-header p {
   font-size: clamp(1.1rem, 2vw, 1.25rem);
-  color: rgba(255, 255, 255, 0.75);
+  color: #A1A1AA;
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
@@ -250,6 +256,9 @@
 }
 
 @media (max-width: 480px) {
+  .beam-header .split-text{
+    font-size: 1.25rem;
+  }
   .animated-beam-wrapper {
     padding: 60px 10px;
   }

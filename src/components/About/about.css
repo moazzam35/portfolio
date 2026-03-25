@@ -1,0 +1,374 @@
+/* ================================================================
+   ABOUT SECTION
+   ================================================================ */
+
+#home {
+  scroll-margin-top: 250px;
+  padding-top: 120px;
+}
+
+.about-2 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-2::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(102, 126, 234, 0.15) 0%,
+    transparent 70%
+  );
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
+
+.about-2::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(118, 75, 162, 0.12) 0%,
+    transparent 70%
+  );
+  top: 50%;
+  right: 20%;
+  transform: translate(50%, -50%);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.main-about-2 {
+  max-width: 1400px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 100px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── About Image ── */
+.about-image {
+  position: relative;
+  width: 100%;
+  height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+}
+
+.circle-bg {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #00ff87;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 0 100px rgba(0, 255, 135, 0.4);
+  display: none;
+}
+
+.about-image img {
+  position: relative;
+  width: 520px;
+  height: 580px;
+  object-fit: cover;
+  z-index: 2;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+}
+
+/* ── About Content ── */
+.about-content {
+  color: #ffffff;
+  max-width: 650px;
+}
+
+.about-content small .split-text {
+  display: inline-block;
+  font-size: 13px;
+  background: linear-gradient(135deg, #e6e6e6 0%, #b39d76 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.about-content h1 .split-text {
+  font-size: 40px;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  left: 0;
+  padding-left: 50px;
+}
+
+.about-content h2 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #b0b0b0;
+  margin-bottom: 35px;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+/* ── Bio paragraph — use .about-bio class, NOT a bare span selector ── */
+/* Using a bare `.about-content span` would bleed into every SplitText  */
+/* token span and cause the border/box glitch you saw.                   */
+.about-bio {
+  display: block;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #c0c0c0;
+  margin-bottom: 45px;
+  text-align: left;
+  font-weight: 300;
+  position: relative;
+  padding-left: 20px;
+  border-left: 3px solid rgba(102, 126, 234, 0.3);
+}
+
+/* ── Hire Me Button ── */
+.hire-me-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: center;
+}
+
+.hire-me-div button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shadow__btn {
+  padding: 10px 20px;
+  border: none;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 7px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  background: rgb(0, 140, 255);
+  box-shadow: 0 0 25px rgb(0, 140, 255);
+}
+
+.shadow__btn:hover {
+  box-shadow:
+    0 0 5px rgb(0, 140, 255),
+    0 0 25px rgb(0, 140, 255),
+    0 0 50px rgb(0, 140, 255),
+    0 0 100px rgb(0, 140, 255);
+}
+.counter-badge {
+  position: absolute;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  color: rgb(223, 223, 223);
+  padding: 10px 15px;
+  border-radius: 100px;
+  text-align: center;
+  animation: bounce 4s ease-in-out infinite;
+  z-index: 10;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-5px); }
+}
+.counter-value {
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+}
+
+.counter-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+/* Positioning */
+.badge-top-left {
+  top: 10px;
+  left: -20px;
+}
+
+.badge-top-right {
+  top: 70px;
+  right: 0px;
+}
+
+.badge-bottom {
+  bottom: 80px;
+  right: 20px;
+}
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .main-about-2 {
+    grid-template-columns: 450px 1fr;
+    gap: 70px;
+  }
+  .about-content h1 {
+    font-size: 70px;
+  }
+  .about-image {
+    height: 600px;
+  }
+  .circle-bg {
+    width: 350px;
+    height: 350px;
+  }
+  .about-image img {
+    width: 370px;
+    height: 530px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-about-2 {
+    grid-template-columns: 400px 1fr;
+    gap: 60px;
+  }
+  .about-content h1 {
+    font-size: 60px;
+  }
+  .about-image {
+    height: 550px;
+  }
+  .circle-bg {
+    width: 320px;
+    height: 320px;
+  }
+  .about-image img {
+    width: 340px;
+    height: 500px;
+  }
+}
+
+@media (max-width: 868px) {
+  .main-about-2 {
+    grid-template-columns: 300px 1fr;
+    gap: 50px;
+  }
+  .about-image {
+    height: 550px;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+  .about-content {
+    max-width: 100%;
+  }
+  .about-content h1 {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 680px) {
+  .main-about-2 {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .about-2 {
+    padding: 60px 20px;
+  }
+  .about-content h1 {
+    font-size: 48px;
+  }
+  .about-content small {
+    font-size: 11px;
+  }
+  .about-content h2 {
+    font-size: 16px;
+  }
+  .about-bio {
+    font-size: 14px;
+  }
+  .about-image {
+    height: 500px;
+  }
+  .circle-bg {
+    width: 280px;
+    height: 280px;
+  }
+  .about-image img {
+    width: 300px;
+    height: 450px;
+  }
+  .hire-me {
+    width: 100%;
+    padding: 14px 35px;
+  }
+  .about-content h1 .split-text {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .about-content h1 {
+    font-size: 42px;
+    letter-spacing: 2px;
+  }
+  .about-image {
+    height: 450px;
+  }
+  .circle-bg {
+    width: 250px;
+    height: 250px;
+  }
+  .about-image img {
+    width: 260px;
+    height: 400px;
+  }
+  .badge-1 {
+    top: 40px;
+    right: 10px;
+  }
+  .badge-2 {
+    left: -10px;
+  }
+  .badge-3 {
+    bottom: 60px;
+    right: 10px;
+  }
+}

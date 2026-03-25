@@ -9,6 +9,8 @@ import bootstrap from "../../assets/tech/boostrap.png"
 import next from "../../assets/tech/nextjs.png"
 import github from "../../assets/tech/github.1.png"
 import js from "../../assets/tech/js.png"
+import SplitText from "../About/Split Text/SplitText"
+import TextType from "../Hero/Rewrite Text/TextType"
 
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
@@ -42,10 +44,11 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
         
         {/* Header */}
         <div className="beam-header" data-aos="fade-up">
-          <h2>
-            Development <span className="gradient-text">Workflow</span>
-          </h2>
-          <p>From design to deployment - my complete tech stack</p>
+         <TextType className="split-text" text={["Where Ideas Become Interfaces", "End-to-End Development"]} />
+          <SplitText
+            text="From design to deployment - my complete tech stack"
+            tag="p"
+          />
         </div>
 
         {/* Beam Container */}

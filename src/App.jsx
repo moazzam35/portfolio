@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import Bg from "./components/bg/bg";
-import Header from "./components/header";
-import Hero from "./components/hero-section";
-import About from "./components/About";
+import Bg from "./components/BG-main/bg";
+import Header from "./components/Header/header";
+import Hero from "./components/Hero/hero-section";
+import About from "./components/About/About";
 import "./App.css";
 import AOS from "aos";
-import Projects from "./components/projects";
+import Projects from "./components/Projects/projects";
 import { AnimatedBeamMultipleOutputDemo } from "./components/AnimatedBeam/animated-beam";
-import InfiniteScroll from "./components/iconscrool";
-import SkillProgress from "./components/circlepro";
-import UserChatsAndReviews from "./components/userreviews";
-import Footer from "./components/contact";
+import InfiniteScroll from "./components/Icon-animation/iconscrool";
 
+import Footer from "./components/Contact/contact";
 
+import Skills from "./components/Circle-progress/Skills";
+import UseReviews from "./components/Reviews/userreviews";
 
 function App() {
   useEffect(() => {
@@ -31,8 +31,8 @@ function App() {
       <Projects />
       <AnimatedBeamMultipleOutputDemo />
       <InfiniteScroll />
-      <SkillProgress />
-      <UserChatsAndReviews />
+      <Skills />
+      <UseReviews />
       <Footer />
     </>
   );

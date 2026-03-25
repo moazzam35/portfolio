@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
-
+import "./iconscrool.css";
 // Import your tech stack images
-import htmlImg from "../assets/tech/html.png";
-import cssImg from "../assets/tech/css.png";
-import jsImg from "../assets/tech/js.png";
-import tsImg from "../assets/tech/typescript.png";
-import reactImg from "../assets/tech/react.png";
-import nextImg from "../assets/tech/nextjs.jpg";
-import gitImg from "../assets/tech/git.png";
-import githubImg from "../assets/tech/github.png";
-import postmanImg from "../assets/tech/postman.png";
-import supabaseImg from "../assets/tech/supabase.png";
-import appwriteImg from "../assets/tech/appwrite.png";
-import figmaImg from "../assets/tech/figma.png";
-import boostrap from "../assets/tech/boostrap.png";
-import  mongodb from "../assets/tech/mongodb.png";
-import  Vs from "../assets/tech/Vscode.png";
+import htmlImg from "../../assets/tech/html.png";
+import cssImg from "../../assets/tech/css.png";
+import jsImg from "../../assets/tech/js.png";
+import tsImg from "../../assets/tech/typescript.png";
+import reactImg from "../../assets/tech/react.png";
+import nextImg from "../../assets/tech/nextjs.jpg";
+import gitImg from "../../assets/tech/git.png";
+import githubImg from "../../assets/tech/github.png";
+import postmanImg from "../../assets/tech/postman.png";
+import supabaseImg from "../../assets/tech/supabase.png";
+import appwriteImg from "../../assets/tech/appwrite.png";
+import figmaImg from "../../assets/tech/figma.png";
+import boostrap from "../../assets/tech/boostrap.png";
+import mongodb from "../../assets/tech/mongodb.png";
+import Vs from "../../assets/tech/Vscode.png";
 
 import "aos/dist/aos.css";
 

@@ -1,0 +1,158 @@
+/* ================================================================
+   ICONSCROOL — TECH STACK MARQUEE
+   ================================================================ */
+
+.tech-stack-section {
+  min-height: 80vh;
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.tech-stack-header {
+  text-align: center;
+  margin-bottom: 80px;
+  padding: 0 20px;
+}
+
+.tech-stack-header h2 {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(120deg, #b5f123, #c8f136, #e0ff7a);;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 15px;
+}
+
+.tech-stack-header p {
+  font-size: 18px;
+  color: #888;
+}
+
+/* ── Scroll Container ── */
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.scroll-container::before,
+.scroll-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.scroll-container::before {
+  left: 0;
+  background: linear-gradient(90deg, #000000 0%, transparent 100%);
+}
+
+.scroll-container::after {
+  right: 0;
+  background: linear-gradient(270deg, #000000 0%, transparent 100%);
+}
+
+/* ── Scroll Content ── */
+.scroll-content {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+}
+
+.scroll-right {
+  animation: scroll-right 30s linear infinite;
+}
+
+@keyframes scroll-right {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.scroll-left {
+  animation: scroll-left 30s linear infinite;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.scroll-content:hover {
+  animation-play-state: paused;
+}
+
+/* ── Tech Card ── */
+.tech-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.tech-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+}
+
+.tech-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tech-card:hover .tech-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.tech-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .tech-stack-header h2 { font-size: 36px; }
+  .tech-stack-header p  { font-size: 16px; }
+  .tech-card { min-width: 120px; padding: 15px; }
+  .tech-icon { width: 70px; height: 70px; font-size: 30px; }
+  .tech-name { font-size: 14px; }
+  .scroll-content { gap: 20px; }
+}
+
+@media (max-width: 580px) {
+  .tech-stack-section { padding: 60px 0; }
+  .tech-stack-header { margin-bottom: 50px; }
+  .tech-stack-header h2 { font-size: 28px; }
+  .tech-card { min-width: 100px; padding: 12px; }
+  .tech-icon { width: 60px; height: 60px; font-size: 24px; }
+  .tech-name { font-size: 12px; }
+}

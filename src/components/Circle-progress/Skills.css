@@ -1,0 +1,110 @@
+/* ── Root ─────────────────────────────────────── */
+.sk-root {
+  background: #0f0f0f;
+  padding: 72px 48px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ── Header row ───────────────────────────────── */
+.sk-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sk-heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f0f0f0;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.sk-heading em {
+  color: #c8f135;
+  font-style: normal;
+}
+
+.sk-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── List ─────────────────────────────────────── */
+.sk-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Row ──────────────────────────────────────── */
+.sk-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 48px;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sk-row:last-child {
+  border-bottom: none;
+}
+
+/* ── Skill name ───────────────────────────────── */
+.sk-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+}
+
+/* ── Progress track ───────────────────────────── */
+.sk-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sk-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  background: #c8f135;
+}
+
+/* ── Percentage ───────────────────────────────── */
+.sk-pct {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f0f0f0;
+  letter-spacing: -0.02em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 540px) {
+  .sk-root {
+    padding: 48px 24px;
+  }
+
+  .sk-heading {
+    font-size: 24px;
+  }
+
+  .sk-row {
+    grid-template-columns: 100px 1fr 40px;
+    gap: 16px;
+  }
+}
