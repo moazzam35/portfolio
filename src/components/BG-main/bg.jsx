@@ -7,7 +7,7 @@
             particleColors={["#bca9a9"]}
             particleCount={500}
             particleSpread={10}
-            speed={0.2}
+            speed={0.25}
             particleBaseSize={100}
             moveParticlesOnHover
             alphaParticles={false}

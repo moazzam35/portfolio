@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Bg from "./components/BG-main/bg";
 import Header from "./components/Header/header";
 import Hero from "./components/Hero/hero-section";
@@ -13,8 +13,12 @@ import Footer from "./components/Contact/contact";
 
 import Skills from "./components/Circle-progress/Skills";
 import UseReviews from "./components/Reviews/userreviews";
+import Preloader from "./components/preloader/preloader";
+import CustomCursor from "./components/Cursor/Cursor";
 
 function App() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -22,18 +26,29 @@ function App() {
     });
     AOS.refresh();
   }, []);
+
+  const handlePreloaderComplete = () => {
+    setShowPreloader(false);
+  };
+
   return (
     <>
-      <Bg />
-      <Header />
-      <Hero />
-      <About />
-      <Projects />
-      <AnimatedBeamMultipleOutputDemo />
-      <InfiniteScroll />
-      <Skills />
-      <UseReviews />
-      <Footer />
+      <CustomCursor />
+      {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
+      {!showPreloader && (
+        <>
+          <Bg />
+          <Header />
+          <Hero />
+          <About />
+          <Projects />
+          <AnimatedBeamMultipleOutputDemo />
+          <InfiniteScroll />
+          <Skills />
+          <UseReviews />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

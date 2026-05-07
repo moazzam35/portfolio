@@ -11,9 +11,9 @@ function Hero() {
           typingSpeed={75}
           pauseDuration={1500}
           showCursor
-          cursorCharacter="_"
+          cursorCharacter="|"
           text={[
-            "Hello, I'm Moazzam",
+            "Hello, My name is Moazzam pasha",
             "Frontend Developer & UI Engineer",
             "Turning ideas into interactive designs",
             "Responsive & performance-focused",

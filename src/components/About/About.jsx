@@ -123,7 +123,7 @@ function About() {
             <h1>
               <SplitText
                 text="Moazzam Pasha"
-                className="split-text"
+                className="split-text-main"
                 splitType="chars"
                 variant="fadeUp"
                 delay={90}

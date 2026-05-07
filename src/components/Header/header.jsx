@@ -305,21 +305,7 @@ export default function Header() {
             <em>.</em>
           </span>
         </a>
-
-        {/* "Available" badge — blur + words, slightly delayed */}
-        <div className="hd-badge">
-          <div className="hd-dot" />
-          <SplitText
-            text="Available"
-            tag="span"
-            splitType="chars"
-            variant="fadeUp"
-            delay={35}
-            duration={500}
-            initialDelay={400}
-            threshold={0}
-          />
-        </div>
+        
 
         {/* Desktop nav — each link fadeUp chars, staggered by index */}
         <nav className="hd-nav">

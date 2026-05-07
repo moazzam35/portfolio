@@ -44,7 +44,7 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
         
         {/* Header */}
         <div className="beam-header" data-aos="fade-up">
-         <TextType className="split-text" text={["Where Ideas Become Interfaces", "End-to-End Development"]} />
+         <TextType className="split-text" text={["Where Ideas Become Interfaces", "End-to-End Development" , "Where Vision Meets Code" , "Designed to Feel, Built to Perform" ]} />
           <SplitText
             text="From design to deployment - my complete tech stack"
             tag="p"

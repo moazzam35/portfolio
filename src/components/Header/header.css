@@ -10,25 +10,6 @@
   --dim: rgba(245,245,240,0.35);
   --ease: cubic-bezier(0.16,1,0.3,1);
 }
-
-/* ── Custom Cursor ── */
-.cur {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: var(--acc);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: width 0.35s var(--ease), height 0.35s var(--ease);
-  mix-blend-mode: difference;
-}
-.cur.hov {
-  width: 44px;
-  height: 44px;
-}
-
 /* ── Scroll Progress Bar ── */
 .prog {
   position: fixed;

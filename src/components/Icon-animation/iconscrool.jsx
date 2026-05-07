@@ -44,7 +44,6 @@ function InfiniteScroll() {
     { name: "Figma", image: figmaImg, color: "#F24E1E" },
     { name: "Bootstrap", image: boostrap, color: "#7952B3" },
     { name: "MongoDB", image: mongodb, color: "#47A248" },
-    { name: "VS Code", image: Vs, color: "#007ACC" },
   ];
 
   return (

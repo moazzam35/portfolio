@@ -108,21 +108,8 @@
   max-width: 650px;
 }
 
-.about-content small .split-text {
-  display: inline-block;
-  font-size: 13px;
-  background: linear-gradient(135deg, #e6e6e6 0%, #b39d76 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  position: relative;
-}
 
-.about-content h1 .split-text {
+.about-content h1 .split-text-main {
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
@@ -142,6 +129,7 @@
   margin-bottom: 35px;
   letter-spacing: 2px;
   font-style: italic;
+  color: rgba(135, 177, 142, 0.8);
 }
 
 /* ── Bio paragraph — use .about-bio class, NOT a bare span selector ── */
@@ -339,8 +327,9 @@
     width: 100%;
     padding: 14px 35px;
   }
-  .about-content h1 .split-text {
+  .about-content h1 .split-text-main {
     padding-left: 0;
+    font-size: larger;
   }
 }
 
