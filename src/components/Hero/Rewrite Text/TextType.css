@@ -1,6 +1,11 @@
 .text-type {
   display: inline-block;
   white-space: pre-wrap;
+  padding: 0.4em 0.8em;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .text-type__cursor {

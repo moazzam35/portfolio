@@ -151,10 +151,13 @@
 }
 
 @media (max-width: 580px) {
-  .tech-stack-section { padding: 60px 0; }
-  .tech-stack-header { margin-bottom: 50px; }
-  .tech-stack-header h2 { font-size: 28px; }
-  .tech-card { min-width: 100px; padding: 12px; }
-  .tech-icon { width: 60px; height: 60px; font-size: 24px; }
-  .tech-name { font-size: 12px; }
+  .tech-stack-section { padding: 40px 0; }
+  .tech-stack-header { margin-bottom: 30px; }
+  .tech-stack-header h2 { font-size: 24px; }
+  .tech-card { min-width: 56px; padding: 10px; gap: 8px; border-radius: 12px; }
+  .tech-icon { width: 36px; height: 36px; font-size: 18px; border-radius: 10px; }
+  .tech-name { font-size: 10px; }
+  .scroll-content { gap: 10px; }
+  .scroll-container::before,
+  .scroll-container::after { width: 50px; }
 }
