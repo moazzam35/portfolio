@@ -192,7 +192,7 @@ function ChatView() {
   }, [typing]);
 
   return (
-    <div className="chat">
+    <div className="chat" >
       {/* Sidebar */}
       <aside className="chat__sidebar">
         <div className="chat__sb-header">
@@ -486,7 +486,7 @@ export default function PortfolioSection() {
     <div className="ps">
 
       {/* Hero — eyebrow fadeUp words, title rotateUp chars, italic pop chars, KPI glitch */}
-      <header className="ps__hero">
+      <header className="ps__hero" id="reviews">
         <div>
           {/* Eyebrow */}
           <p className="ps__hero-eyebrow">

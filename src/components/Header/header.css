@@ -11,15 +11,57 @@
   --ease: cubic-bezier(0.16,1,0.3,1);
 }
 /* ── Scroll Progress Bar ── */
-.prog {
+.prog-track {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--acc), var(--acc2));
   z-index: 10001;
-  transition: width 0.1s linear;
   pointer-events: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.prog-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #00c6ff 0%,
+    #7b2ff7 45%,
+    #f64f59 100%
+  );
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Soft glow behind the bar */
+.prog-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(5px);
+  opacity: 0.6;
+}
+
+/* Glowing dot at the tip */
+.prog-dot {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 6px 2px #7b2ff7,
+    0 0 16px 5px rgba(123, 47, 247, 0.5),
+    0 0 28px 8px rgba(246, 79, 89, 0.25);
+  will-change: left;
 }
 
 /* ── Header Shell ── */
@@ -33,14 +75,17 @@
   display: flex;
   align-items: center;
   padding: 0 44px;
-  transition: background 0.5s var(--ease), border-color 0.5s;
+  transition: background 0.5s var(--ease), border-color 0.5s, backdrop-filter 0.5s;
   border-bottom: 1px solid transparent;
+  background: rgba(7, 7, 7, 0.4);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
 }
 .hd.sc {
-  background: var(--glass);
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  border-color: rgba(255, 255, 255, 0.055);
+  background: rgba(7, 7, 7, 0.75);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* ── Logo ── */
@@ -72,34 +117,6 @@
   color: var(--acc);
 }
 
-/* ── Available Badge ── */
-.hd-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: 16px;
-  padding: 5px 11px;
-  border: 1px solid rgba(212, 255, 0, 0.22);
-  border-radius: 100px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--acc);
-  letter-spacing: 0.04em;
-}
-.hd-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--acc);
-  border-radius: 50%;
-  animation: dpulse 1.8s ease-in-out infinite;
-}
-@keyframes dpulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 255, 0, 0.55); }
-  50%       { box-shadow: 0 0 0 5px rgba(212, 255, 0, 0); }
-}
-
-/* ── Desktop Nav ── */
 .hd-nav {
   display: flex;
   align-items: center;
@@ -111,7 +128,6 @@
   align-items: center;
   text-decoration: none;
   padding: 6px 2px;
-  cursor: none;
 }
 .mag-inner {
   display: inline-block;
@@ -155,7 +171,6 @@
   border: none;
   border-radius: 100px;
   text-decoration: none;
-  cursor: none;
   letter-spacing: 0.02em;
   transition: transform 0.35s var(--ease), box-shadow 0.35s;
   flex-shrink: 0;
@@ -270,7 +285,7 @@
 
 .hd-mnum {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 300;
   font-style: italic;
   color: rgba(245, 245, 240, 0.25);
@@ -280,7 +295,7 @@
 }
 .hd-mlabel {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(38px, 10vw, 66px);
+  font-size: clamp(28px, 10vw, 66px);
   font-weight: 800;
   letter-spacing: -2.5px;
   line-height: 1.05;
@@ -341,5 +356,4 @@
   .hd-nav, .hd-cta, .hd-badge { display: none; }
   .hd-ham                    { display: flex; }
   .hd-panel                  { padding: calc(var(--h) + 28px) 28px 32px; }
-  .cur                       { display: none; }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Bg from "./components/BG-main/bg";
 import Header from "./components/Header/header";
 import Hero from "./components/Hero/hero-section";
+import HeroBackground from "./components/Herobackground/herobackground";
 import About from "./components/About/About";
 import "./App.css";
 import AOS from "aos";
@@ -14,7 +14,7 @@ import Footer from "./components/Contact/contact";
 import Skills from "./components/Circle-progress/Skills";
 import UseReviews from "./components/Reviews/userreviews";
 import Preloader from "./components/preloader/preloader";
-import CustomCursor from "./components/Cursor/Cursor";
+import ScrollMarqueeHero from "./components/imagescrool/imagescrool";
 
 function App() {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -33,14 +33,16 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
       {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
       {!showPreloader && (
         <>
-          <Bg />
           <Header />
-          <Hero />
+          <div className="relative h-[600px]">
+            <HeroBackground />
+            <Hero className="relative z-10" />
+          </div>
           <About />
+          <ScrollMarqueeHero/>
           <Projects />
           <AnimatedBeamMultipleOutputDemo />
           <InfiniteScroll />

@@ -16,7 +16,12 @@ import appwriteImg from "../../assets/tech/appwrite.png";
 import figmaImg from "../../assets/tech/figma.png";
 import boostrap from "../../assets/tech/boostrap.png";
 import mongodb from "../../assets/tech/mongodb.png";
-import Vs from "../../assets/tech/Vscode.png";
+import dockerImg from "../../assets/tech/docker.png";
+import gsapImg from "../../assets/tech/gsap.png";
+import nodeImg from "../../assets/tech/node.png";
+import reduxImg from "../../assets/tech/redux.png";
+import sqlImg from "../../assets/tech/sql.png";
+import vercelImg from "../../assets/tech/vercel.png";
 
 import "aos/dist/aos.css";
 
@@ -36,14 +41,20 @@ function InfiniteScroll() {
     { name: "TypeScript", image: tsImg, color: "#3178C6" },
     { name: "React", image: reactImg, color: "#61DAFB" },
     { name: "Next.js", image: nextImg, color: "#000000" },
+    { name: "Node.js", image: nodeImg, color: "#339933" },
+    { name: "Redux", image: reduxImg, color: "#764ABC" },
     { name: "Git", image: gitImg, color: "#F05032" },
     { name: "GitHub", image: githubImg, color: "#181717" },
+    { name: "Docker", image: dockerImg, color: "#2496ED" },
+    { name: "Vercel", image: vercelImg, color: "#000000" },
     { name: "Postman", image: postmanImg, color: "#FF6C37" },
     { name: "Supabase", image: supabaseImg, color: "#3ECF8E" },
     { name: "Appwrite", image: appwriteImg, color: "#F02E65" },
     { name: "Figma", image: figmaImg, color: "#F24E1E" },
     { name: "Bootstrap", image: boostrap, color: "#7952B3" },
     { name: "MongoDB", image: mongodb, color: "#47A248" },
+    { name: "SQL", image: sqlImg, color: "#CC2927" },
+    { name: "GSAP", image: gsapImg, color: "#88CE02" },
   ];
 
   return (

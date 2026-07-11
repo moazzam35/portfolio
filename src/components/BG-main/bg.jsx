@@ -1,8 +1,8 @@
- import Particles from "./particals-bg";
+import Particles from "./particals-bg";
  
- function Bg() {
+function Bg() {
   return (
-    <div className="bg-black overflow-x-hidden " style={{ width: "100%", height: "600px", position: "relative" }}>
+    <div className="bg-black overflow-x-hidden h-screen w-full relative">
           <Particles
             particleColors={["#bca9a9"]}
             particleCount={500}

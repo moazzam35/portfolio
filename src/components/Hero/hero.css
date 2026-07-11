@@ -44,7 +44,13 @@
     left: -150px;
     animation: float 20s ease-in-out infinite reverse;
 }
-
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
 /* ── Container ── */
 .projects-container {
     max-width: 1400px;
@@ -359,5 +365,6 @@
     .view-all-btn {
         width: 100%;
         justify-content: center;
+    
     }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import "./Header.css";
 
 /* ─────────────────────────────────────
@@ -176,32 +177,33 @@ function MagLink({ href, children, isActive, onClick, onEnter, onLeave }) {
 export default function Header() {
   const [open, setOpen]           = useState(false);
   const [scrolled, setScrolled]   = useState(false);
-  const [progress, setProgress]   = useState(0);
   const [active, setActive]       = useState("home");
-  const [cursorPos, setCursorPos] = useState({ x: -200, y: -200 });
-  const [cursorHover, setCursorHover] = useState(false);
 
-  const links = ["Home", "About", "Projects", "Contact"];
+
+  // Framer Motion scroll progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    restDelta: 0.001,
+  });
+  // dot position: 0% → 0vw, 1 → 100vw (clamped via CSS)
+  const dotLeft = useTransform(scaleX, [0, 1], ["0%", "100%"]);
+
+  const links = ["Home", "About", "Projects", "Reviews", "Contact"];
 
   const marqueeText =
     "Available for work · Portfolio 2025 · Based in Pakistan · Front-end Developer · Creative Developer · ";
 
   useEffect(() => {
     const fn = () => {
-      const el = document.documentElement;
-      const total = el.scrollHeight - el.clientHeight;
       setScrolled(window.scrollY > 30);
-      setProgress(total > 0 ? (window.scrollY / total) * 100 : 0);
     };
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  useEffect(() => {
-    const move = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, []);
+
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -215,14 +217,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Custom cursor */}
-      <div
-        className={`cur ${cursorHover ? "hov" : ""}`}
-        style={{ left: cursorPos.x, top: cursorPos.y }}
-      />
-
       {/* Scroll progress */}
-      <div className="prog" style={{ width: `${progress}%` }} />
+      <div className="prog-track">
+        <motion.div className="prog-bar" style={{ scaleX }} />
+        <motion.div className="prog-dot" style={{ left: dotLeft }} />
+      </div>
 
       {/* Mobile full-screen overlay */}
       <div className={`hd-panel ${open ? "open" : ""}`}>
@@ -235,7 +234,7 @@ export default function Header() {
               onClick={() => handleNav(l)}
             >
               {/* Mobile menu — each item staggered with rotateUp on the label */}
-              <span className="hd-mnum">0{i + 1}</span>
+              <span className="">0{i + 1}</span>
               <span className="hd-mlabel">
                 <SplitText
                   text={l}

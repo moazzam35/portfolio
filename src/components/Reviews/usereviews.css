@@ -86,21 +86,13 @@
 
 .ps__hero-eyebrow {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 16px;
   letter-spacing: 0.28em;
   color: var(--t3);
   text-transform: uppercase;
   margin-bottom: 18px;
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-.ps__hero-eyebrow::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--t4);
 }
 
 .ps__hero-title {
