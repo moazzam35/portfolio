@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import "./Header.css";
 
@@ -136,7 +136,7 @@ function SplitText({
 
 
 /* ─── Magnetic Link ────────────────────────────────────────────── */
-function MagLink({ href, children, isActive, onClick, onEnter, onLeave }) {
+function MagLink({ href, children, isActive, onClick }) {
   const ref = useRef(null);
 
   const onMove = useCallback((e) => {
@@ -154,8 +154,7 @@ function MagLink({ href, children, isActive, onClick, onEnter, onLeave }) {
     el.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)";
     el.style.transform = "translate(0,0)";
     setTimeout(() => { if (el) el.style.transition = ""; }, 560);
-    onLeave && onLeave();
-  }, [onLeave]);
+  }, []);
 
   return (
     <a
@@ -164,7 +163,6 @@ function MagLink({ href, children, isActive, onClick, onEnter, onLeave }) {
       className={`mag-link ${isActive ? "active" : ""}`}
       onMouseMove={onMove}
       onMouseLeave={onLeaveEl}
-      onMouseEnter={onEnter}
       onClick={onClick}
     >
       <span className="mag-inner">{children}</span>
@@ -193,7 +191,7 @@ export default function Header() {
   const links = ["Home", "About", "Projects", "Reviews", "Contact"];
 
   const marqueeText =
-    "Available for work · Portfolio 2025 · Based in Pakistan · Front-end Developer · Creative Developer · ";
+    "Available for work · Portfolio 2026 · Based in Pakistan · Front-end Developer · Creative Developer · ";
 
   useEffect(() => {
     const fn = () => {
@@ -274,8 +272,6 @@ export default function Header() {
           href="#home"
           className="hd-logo"
           onClick={() => handleNav("home")}
-          onMouseEnter={() => setCursorHover(true)}
-          onMouseLeave={() => setCursorHover(false)}
         >
           <div className="hd-mark">
             <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -314,8 +310,6 @@ export default function Header() {
               href={`#${l.toLowerCase()}`}
               isActive={active === l.toLowerCase()}
               onClick={() => handleNav(l)}
-              onEnter={() => setCursorHover(true)}
-              onLeave={() => setCursorHover(false)}
             >
               <SplitText
                 text={l}
@@ -336,8 +330,6 @@ export default function Header() {
           href="#contact"
           className="hd-cta"
           onClick={() => handleNav("contact")}
-          onMouseEnter={() => setCursorHover(true)}
-          onMouseLeave={() => setCursorHover(false)}
         >
           <span>
             <SplitText

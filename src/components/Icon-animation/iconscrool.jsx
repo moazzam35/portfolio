@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "./iconscrool.css";
 // Import your tech stack images
@@ -34,7 +34,7 @@ function InfiniteScroll() {
     });
   }, []);
 
-  const techStack = [
+  const techStack1 = [
     { name: "HTML", image: htmlImg, color: "#E34F26" },
     { name: "CSS", image: cssImg, color: "#1572B6" },
     { name: "JavaScript", image: jsImg, color: "#F7DF1E" },
@@ -45,6 +45,9 @@ function InfiniteScroll() {
     { name: "Redux", image: reduxImg, color: "#764ABC" },
     { name: "Git", image: gitImg, color: "#F05032" },
     { name: "GitHub", image: githubImg, color: "#181717" },
+  ];
+
+  const techStack2 = [
     { name: "Docker", image: dockerImg, color: "#2496ED" },
     { name: "Vercel", image: vercelImg, color: "#000000" },
     { name: "Postman", image: postmanImg, color: "#FF6C37" },
@@ -66,7 +69,7 @@ function InfiniteScroll() {
 
       <div className="scroll-container">
         <div className="scroll-content scroll-right">
-          {[...techStack, ...techStack].map((tech, index) => (
+          {[...techStack1, ...techStack1].map((tech, index) => (
             <div key={`right-${tech.name}-${index}`} className="tech-card">
               <div className="tech-icon" style={{ borderColor: tech.color }}>
                 <img src={tech.image} alt={tech.name} className="tech-img" />
@@ -80,7 +83,7 @@ function InfiniteScroll() {
       {/* Second Row - Scrolling Left */}
       <div className="scroll-container">
         <div className="scroll-content scroll-left">
-          {[...techStack, ...techStack].map((tech, index) => (
+          {[...techStack2, ...techStack2].map((tech, index) => (
             <div key={`left-${tech.name}-${index}`} className="tech-card">
               <div className="tech-icon" style={{ borderColor: tech.color }}>
                 <img src={tech.image} alt={tech.name} className="tech-img" />

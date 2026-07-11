@@ -319,8 +319,6 @@ export default function ScrollMarqueeHero() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-        * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }

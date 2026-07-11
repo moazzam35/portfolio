@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/header";
 import Hero from "./components/Hero/hero-section";
 import HeroBackground from "./components/Herobackground/herobackground";
@@ -37,17 +37,19 @@ function App() {
       {!showPreloader && (
         <>
           <Header />
-          <div className="relative h-[600px]">
-            <HeroBackground />
-            <Hero className="relative z-10" />
-          </div>
-          <About />
-          <ScrollMarqueeHero/>
-          <Projects />
-          <AnimatedBeamMultipleOutputDemo />
-          <InfiniteScroll />
-          <Skills />
-          <UseReviews />
+          <main>
+            <div className="relative h-[600px]">
+              <HeroBackground />
+              <Hero className="relative z-10" />
+            </div>
+            <About />
+            <ScrollMarqueeHero/>
+            <Projects />
+            <AnimatedBeamMultipleOutputDemo />
+            <InfiniteScroll />
+            <Skills />
+            <UseReviews />
+          </main>
           <Footer />
         </>
       )}

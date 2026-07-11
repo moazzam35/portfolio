@@ -20,7 +20,7 @@ const TOTAL_ELEMENTS = 22;
 const TOTAL_CONNECTIONS = 5;
 
 // Mobile: fewer elements, smaller grid
-const MOBILE_ELEMENTS = 14;
+const MOBILE_ELEMENTS = 8;
 const MOBILE_CONNECTIONS = 2;
 const TABLET_ELEMENTS = 16;
 const TABLET_CONNECTIONS = 3;
@@ -169,8 +169,8 @@ function generateElements(count, mobile = false) {
 
     const typeDef = pickWeightedType();
     const profile = layerProfile(inCenter);
-    // On mobile, reduce sizes but keep them visible
-    const sizeMultiplier = mobile ? 0.7 : 1;
+    // On mobile, keep elements big but fewer
+    const sizeMultiplier = mobile ? 0.9 : 1;
     const size = rand(typeDef.size[0], typeDef.size[1]) * profile.sizeMul * sizeMultiplier;
     const direction = directionFromPosition(x, y);
     const magnitude = mobile ? rand(80, 160) : rand(160, 320);
@@ -705,20 +705,22 @@ export default function HeroBackground() {
   const spotlightRef = useRef(null);
   const rippleContainerRef = useRef(null);
 
-  // Detect mobile/tablet
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.innerWidth < BREAKPOINTS.mobile;
-  });
+  // Detect mobile/tablet - use actual device width, not viewport
+  const getDeviceWidth = () => {
+    if (typeof window === "undefined") return 1024;
+    // Use screen.width which reports actual device width regardless of desktop mode
+    return Math.min(window.innerWidth, screen.width);
+  };
+
+  const [isMobile, setIsMobile] = useState(() => getDeviceWidth() < BREAKPOINTS.mobile);
   const [isTablet, setIsTablet] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const w = window.innerWidth;
+    const w = getDeviceWidth();
     return w >= BREAKPOINTS.mobile && w < BREAKPOINTS.tablet;
   });
 
   useEffect(() => {
     const handleResize = () => {
-      const w = window.innerWidth;
+      const w = getDeviceWidth();
       setIsMobile(w < BREAKPOINTS.mobile);
       setIsTablet(w >= BREAKPOINTS.mobile && w < BREAKPOINTS.tablet);
     };

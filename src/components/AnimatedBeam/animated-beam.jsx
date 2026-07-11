@@ -1,14 +1,14 @@
-import React, { forwardRef, useRef } from "react"
+import { forwardRef, useRef } from "react"
 import { cn } from "../../lib/utils"
 import { AnimatedBeam } from "./AnimatedBeam"
 import "./animated-beam.css"
 import figma from "../../assets/tech/figma.1.png"
 import person from "../../assets/tech/person.png"
-import react from "../../assets/tech/react-1.png"
-import bootstrap from "../../assets/tech/boostrap.png"
-import next from "../../assets/tech/nextjs.jpg"
-import github from "../../assets/tech/github.1.png"
 import js from "../../assets/tech/js.png"
+import node from "../../assets/tech/node.png"
+import mongodb from "../../assets/tech/mongodb.png"
+import next from "../../assets/tech/nextjs.jpg"
+import typescript from "../../assets/tech/typescript.png"
 import SplitText from "../About/Split Text/SplitText"
 import TextType from "../Hero/Rewrite Text/TextType"
 
@@ -32,11 +32,11 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
   const containerRef = useRef(null)
   const figmaRef = useRef(null)
   const personRef = useRef(null)
-  const reactRef = useRef(null)
-  const bootstrapRef = useRef(null)
-  const nextRef = useRef(null)
-  const githubRef = useRef(null)
   const jsRef = useRef(null)
+  const nodeRef = useRef(null)
+  const mongodbRef = useRef(null)
+  const nextRef = useRef(null)
+  const typescriptRef = useRef(null)
 
   return (
     <div className="animated-beam-wrapper">
@@ -71,20 +71,20 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
 
             {/* Output: Technologies */}
             <div className="beam-column beam-column-tech">
-              <Circle ref={reactRef} className="circle-tech">
-                <img src={react} alt="React" />
+              <Circle ref={jsRef} className="circle-tech">
+                <img src={js} alt="JavaScript" />
               </Circle>
-              <Circle ref={bootstrapRef} className="circle-tech">
-                <img src={bootstrap} alt="Bootstrap" />
+              <Circle ref={nodeRef} className="circle-tech">
+                <img src={node} alt="Node.js" />
+              </Circle>
+              <Circle ref={mongodbRef} className="circle-tech">
+                <img src={mongodb} alt="MongoDB" />
               </Circle>
               <Circle ref={nextRef} className="circle-tech">
                 <img src={next} alt="Next.js" />
               </Circle>
-              <Circle ref={githubRef} className="circle-tech">
-                <img src={github} alt="GitHub" />
-              </Circle>
-              <Circle ref={jsRef} className="circle-tech">
-                <img src={js} alt="JavaScript" />
+              <Circle ref={typescriptRef} className="circle-tech">
+                <img src={typescript} alt="TypeScript" />
               </Circle>
             </div>
           </div>
@@ -105,7 +105,7 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
           <AnimatedBeam
             containerRef={containerRef}
             fromRef={personRef}
-            toRef={reactRef}
+            toRef={jsRef}
             duration={2}
             gradientStartColor="#a78bfa"
             gradientStopColor="#ec4899"
@@ -113,7 +113,15 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
           <AnimatedBeam
             containerRef={containerRef}
             fromRef={personRef}
-            toRef={bootstrapRef}
+            toRef={nodeRef}
+            duration={2}
+            gradientStartColor="#a78bfa"
+            gradientStopColor="#ec4899"
+          />
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={personRef}
+            toRef={mongodbRef}
             duration={2}
             gradientStartColor="#a78bfa"
             gradientStopColor="#ec4899"
@@ -129,15 +137,7 @@ export function AnimatedBeamMultipleOutputDemo({ className }) {
           <AnimatedBeam
             containerRef={containerRef}
             fromRef={personRef}
-            toRef={githubRef}
-            duration={2}
-            gradientStartColor="#a78bfa"
-            gradientStopColor="#ec4899"
-          />
-          <AnimatedBeam
-            containerRef={containerRef}
-            fromRef={personRef}
-            toRef={jsRef}
+            toRef={typescriptRef}
             duration={2}
             gradientStartColor="#a78bfa"
             gradientStopColor="#ec4899"

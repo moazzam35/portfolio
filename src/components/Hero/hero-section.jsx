@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import DecryptedText from "../text-decrypt/DecryptedText";
 import TextType from "./Rewrite Text/TextType";
 
 function Hero({ className = "" }) {
