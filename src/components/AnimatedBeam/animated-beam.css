@@ -27,7 +27,7 @@
 /* ── Header ── */
 .beam-header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,12 +60,12 @@
   align-items: center;
   justify-content: center;
   overflow: visible;
-  padding: 60px 30px;
+  padding: 36px 30px;
   background: rgba(255, 255, 255, 0.02);
   border-radius: 24px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  min-height: 350px;
+  min-height: auto;
 }
 
 /* ── Beam Grid — ALWAYS ROW ── */
@@ -116,10 +116,6 @@
   position: relative;
 }
 
-.circle-person img {
-  background-color: #fff;
-}
-
 .circle-tech {
   width: 3.9rem;
   height: 3.9rem;
@@ -127,6 +123,27 @@
   border: 2px solid rgba(139, 92, 246, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+.circle-figma,
+.circle-tech {
+  padding: 0;
+}
+
+.circle-figma img,
+.circle-tech img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.circle-person img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #fff;
 }
 
 /* ── Responsive ── */
@@ -147,15 +164,15 @@
 
 @media (max-width: 768px) {
   .animated-beam-wrapper {
-    padding: 80px 16px;
+    padding: 48px 16px;
   }
   .beam-header {
-    margin-bottom: 60px;
+    margin-bottom: 32px;
   }
   .beam-container {
-    padding: 40px 16px;
+    padding: 28px 16px;
     border-radius: 20px;
-    min-height: 280px;
+    min-height: auto;
   }
   .beam-grid {
     gap: 24px;
@@ -163,6 +180,44 @@
   }
   .beam-column-tech {
     gap: 10px;
+  }
+  .circle-person {
+    width: 4rem;
+    height: 4rem;
+  }
+  .circle-figma {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  .circle-tech {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .beam-header .split-text {
+    font-size: 1.25rem;
+  }
+  .animated-beam-wrapper {
+    padding: 36px 10px;
+  }
+  .beam-header {
+    margin-bottom: 24px;
+  }
+  .beam-header p {
+    font-size: 0.9rem;
+  }
+  .beam-container {
+    padding: 20px 10px;
+    border-radius: 16px;
+    min-height: auto;
+  }
+  .beam-grid {
+    gap: 14px;
+  }
+  .beam-column-tech {
+    gap: 7px;
   }
   .circle-person {
     width: 3.5rem;
@@ -173,45 +228,7 @@
     height: 3rem;
   }
   .circle-tech {
-    width: 2.6rem;
-    height: 2.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .beam-header .split-text {
-    font-size: 1.25rem;
-  }
-  .animated-beam-wrapper {
-    padding: 60px 10px;
-  }
-  .beam-header {
-    margin-bottom: 40px;
-  }
-  .beam-header p {
-    font-size: 0.9rem;
-  }
-  .beam-container {
-    padding: 28px 10px;
-    border-radius: 16px;
-    min-height: 240px;
-  }
-  .beam-grid {
-    gap: 14px;
-  }
-  .beam-column-tech {
-    gap: 7px;
-  }
-  .circle-person {
     width: 2.8rem;
     height: 2.8rem;
-  }
-  .circle-figma {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
-  .circle-tech {
-    width: 2rem;
-    height: 2rem;
   }
 }

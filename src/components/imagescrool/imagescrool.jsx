@@ -274,11 +274,11 @@ export default function ScrollMarqueeHero() {
 
   return (
     <div
-      className="min-h-screen"
+      className="h-auto"
       style={{ background: COLORS.bg, fontFamily: "'Helvetica Neue', sans-serif" }}
     >
       {/* ── sticky viewport ── */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
+      <div className="sticky top-0 h-[260px] sm:h-[300px] overflow-hidden flex flex-col justify-center">
         {/* radial glow backdrop — swap rgba below to a different COLORS value for a different mood */}
         <div
           className="absolute inset-0 pointer-events-none"

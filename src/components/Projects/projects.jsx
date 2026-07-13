@@ -454,6 +454,7 @@ function useSwipeNav(ref, onPrev, onNext) {
     const THRESHOLD = 42;
 
     const down = (e) => {
+      if (e.target.closest("a, button")) return;
       s.down = true; s.dx = 0; s.startX = e.clientX;
       el.setPointerCapture?.(e.pointerId);
     };

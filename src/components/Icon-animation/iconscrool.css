@@ -3,7 +3,7 @@
    ================================================================ */
 
 .tech-stack-section {
-  min-height: 80vh;
+  min-height: auto;
   background: #000000;
   position: relative;
   overflow: hidden;
@@ -14,7 +14,7 @@
 /* ── Header ── */
 .tech-stack-header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   padding: 0 20px;
 }
 

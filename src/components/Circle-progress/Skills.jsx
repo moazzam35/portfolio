@@ -256,7 +256,7 @@ export default function SkillsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-black px-6 py-24 sm:py-28 lg:py-32"
+      className="relative w-full bg-black px-6 py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-5xl">
         <motion.div
