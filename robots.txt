@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://moazzam35.github.io/portfolio/sitemap.xml
