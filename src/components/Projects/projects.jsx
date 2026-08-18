@@ -119,7 +119,32 @@ const isTypingTarget = (el) => {
 
 const PROJECTS = [
   {
-    id: 1,
+  id: 1,
+  title: "Resumate",
+  year: "2026",
+  role: "Full Stack AI Project",
+  desc: "An AI-powered full-stack resume builder and career platform featuring AI resume generation, ATS scoring, keyword matching, professional templates, PDF export, cover letter generation, interview preparation, authentication, and responsive user experiences.",
+  tags: [
+    "Next.js",
+    "React",
+    "JavaScript",
+    "Tailwind CSS",
+    "AI Integration",
+    "ATS Analysis",
+    "Authentication",
+    "PDF Generation",
+    "Framer Motion",
+    "GSAP",
+    "Lucide React",
+    "Full Stack",
+  ],
+  demo: "https://resumate-rouge-xi.vercel.app/",
+  code: "https://github.com/moazzam35/resume_bulider",
+  num: "02",
+  color: "#5B4B8A",
+},
+  {
+    id: 2,
     title: "Aristocraft",
     year: "2026",
     role: "Full Stack project",
@@ -143,9 +168,55 @@ const PROJECTS = [
     num: "01",
     color: "#004b47",
   },
-
+{
+  id: 3,
+  title: "Roomora",
+  year: "2026",
+  role: "Full Stack project",
+  desc: "A full-stack hotel management and booking platform allowing users to browse rooms, view availability, select accommodations, and manage bookings, with an admin dashboard for room, reservation, and user management.",
+  tags: [
+    "Next.js",
+    "React",
+    "JavaScript",
+    "MongoDB",
+    "Tailwind CSS",
+    "Authentication",
+    "Authorization",
+    "Admin Dashboard",
+    "CRUD",
+    "Booking System",
+    "Full Stack",
+  ],
+  demo: "",
+  code: "https://github.com/moazzam35/Roomora",
+  num: "03",
+  color: "#B56B45",
+},{
+  id: 4,
+  title: "CareVista",
+  year: "2026",
+  role: "Full Stack project",
+  desc: "A full-stack hospital management system designed to streamline patient, doctor, and appointment management with role-based access, administrative workflows, database-backed CRUD operations, and a responsive admin dashboard.",
+  tags: [
+    "Next.js",
+    "React",
+    "JavaScript",
+    "MongoDB",
+    "Tailwind CSS",
+    "Authentication",
+    "RBAC",
+    "Admin Dashboard",
+    "CRUD",
+    "Appointment Management",
+    "Full Stack",
+  ],
+  demo: "",
+  code: "https://github.com/moazzam35/CareVista",
+  num: "04",
+  color: "#2F6B73",
+},
   {
-    id: 2,
+    id: 5,
     title: "Wheelzy",
     year: "2026",
     role: "Full Stack project",
@@ -170,7 +241,7 @@ const PROJECTS = [
   },
 
   {
-    id: 3,
+    id: 6,
     title: "Wheelzy Dashboard",
     year: "2026",
     role: "Frontend Developer",
@@ -192,7 +263,7 @@ const PROJECTS = [
   },
 
   {
-    id: 4,
+    id: 7,
     title: "ShopCraft",
     year: "2024",
     role: "Frontend Developer",
@@ -211,7 +282,7 @@ const PROJECTS = [
   },
 
   {
-    id: 5,
+    id: 8,
     title: "Country Cards",
     year: "2024",
     role: "Frontend Developer",
@@ -230,7 +301,7 @@ const PROJECTS = [
   },
 
   {
-    id: 6,
+    id: 9,
     title: "CRUD Manager",
     year: "2024",
     role: "Frontend Developer",
@@ -249,7 +320,7 @@ const PROJECTS = [
   },
 
   {
-    id: 7,
+    id: 10,
     title: "Pokémon Data",
     year: "2024",
     role: "Frontend Developer",

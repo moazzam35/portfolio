@@ -1,9 +1,31 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./preloader.css";
+import {
+  HERO_CRITICAL_IMAGES,
+  BACKGROUND_IMAGES,
+  preloadImages,
+  preloadInBackground,
+  isMobileDevice,
+  isTabletDevice,
+} from "../../lib/preload";
 
 const NAME = "MOAZZAM PASHA";
 const DECILE_EASE = [0.76, 0, 0.24, 1];
+
+/* --- loading policy ---------------------------------------------------
+   MIN_DISPLAY_MS — UX floor: the preloader's own UI (characters, fill
+   bar) needs ~1.6s to play out, so we never dismiss it faster than that,
+   even when every asset is already cached. Not an artificial "loading"
+   delay — readiness still gates the reveal.
+   MAX_WAIT_MS — slow-network fallback: if the critical hero assets cannot
+   finish within this window, the Hero is revealed anyway. It degrades
+   gracefully because the background animation is procedural SVG; the
+   preloaded PNGs are decorative accents, and any stragglers keep loading
+   in the background.
+------------------------------------------------------------------------ */
+const MIN_DISPLAY_MS = 1600;
+const MAX_WAIT_MS = 6000;
 
 const containerVariants = {
   animate: {
@@ -36,25 +58,62 @@ const blockVariants = {
 
 export default function Preloader({ onComplete }) {
   const [loading, setLoading] = useState(true);
-  const progress = useMotionValue(0);
-  const [count, setCount] = useState(0);
+  const [progress, setProgress] = useState({
+    loaded: 0,
+    total: HERO_CRITICAL_IMAGES.length,
+  });
+  const deviceRef = useRef("desktop");
 
   useEffect(() => {
-    const controls = animate(progress, 100, {
-      duration: 1.6,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setCount(Math.round(v))
+    let cancelled = false;
+
+    // Detect the layout using the exact same breakpoint logic as
+    // HeroBackground (Math.min(innerWidth, screen.width), < 640 = mobile).
+    // Client-only — this component never runs on a server.
+    if (isMobileDevice()) deviceRef.current = "mobile";
+    else if (isTabletDevice()) deviceRef.current = "tablet";
+
+    if (import.meta.env.DEV) {
+      console.info(`[preload] layout: ${deviceRef.current}`);
+    }
+
+    const minDisplay = new Promise((resolve) => setTimeout(resolve, MIN_DISPLAY_MS));
+    const fallback = new Promise((resolve) => setTimeout(resolve, MAX_WAIT_MS));
+
+    // Phase 1 — critical hero assets. This is the only thing the Hero
+    // waits on; nothing below the fold is part of this phase.
+    const critical = preloadImages(HERO_CRITICAL_IMAGES, {
+      priority: "high",
+      onProgress: (loaded, failed, total) => {
+        if (!cancelled) setProgress({ loaded, total, failed });
+      },
     });
 
-    const timer = setTimeout(() => setLoading(false), 2000);
+    // Phase 2 — reveal the Hero as soon as the critical assets are ready
+    // AND the preloader has played out (or the fallback fires first).
+    // Phase 3 (remaining assets) continues in the background afterwards.
+    Promise.all([minDisplay, Promise.race([critical, fallback])]).then(() => {
+      if (!cancelled) setLoading(false);
+    });
+
     return () => {
-      controls.stop();
-      clearTimeout(timer);
+      cancelled = true;
     };
   }, []);
 
+  const handleExitComplete = () => {
+    // Phase 3 — hero is live; warm the below-fold images at idle priority.
+    preloadInBackground(BACKGROUND_IMAGES);
+    if (onComplete) onComplete();
+  };
+
+  const ratio = progress.total > 0 ? progress.loaded / progress.total : 0;
+  // Cap at 90% while still loading so the bar never claims 100% before
+  // the Hero is actually revealed; it snaps to 100% on exit.
+  const fillScale = loading ? Math.min(ratio, 0.9) : 1;
+
   return (
-    <AnimatePresence onExitComplete={onComplete}>
+    <AnimatePresence onExitComplete={handleExitComplete}>
       {loading && (
         <motion.div
           className="preloader-canvas"
@@ -99,8 +158,8 @@ export default function Preloader({ onComplete }) {
                 <motion.div
                   className="loading-fill"
                   initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ delay: 0.1, duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+                  animate={{ scaleX: fillScale }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 />
               </div>
 
@@ -118,13 +177,13 @@ export default function Preloader({ onComplete }) {
 
                 <motion.div
                   className="counter-block"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
+                  variants={blockVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
-                  <span className="counter-value">{String(count).padStart(3, "0")}</span>
-                  <span className="counter-label">%</span>
+                  <span className="counter-value">{progress.loaded}</span>
+                  <span className="counter-label">/ {progress.total}</span>
                 </motion.div>
               </div>
             </div>

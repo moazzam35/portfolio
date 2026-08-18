@@ -274,7 +274,7 @@ export default function ScrollMarqueeHero() {
 
   return (
     <div
-      className="h-auto"
+      className="h-auto py-24 sm:py-32"
       style={{ background: COLORS.bg, fontFamily: "'Helvetica Neue', sans-serif" }}
     >
       {/* ── sticky viewport ── */}
