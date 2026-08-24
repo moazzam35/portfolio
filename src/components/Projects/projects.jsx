@@ -1,4 +1,10 @@
-import { useRef, useEffect, useState, useCallback, useLayoutEffect } from "react";
+import {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import "./Project.css";
@@ -54,7 +60,7 @@ function useInView({ threshold = 0.15, rootMargin = "0px", once = true } = {}) {
           setVisible(false);
         }
       },
-      { threshold, rootMargin }
+      { threshold, rootMargin },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -78,7 +84,14 @@ function useRevealOnActive(active) {
 }
 
 /* AnimSpan — animated span */
-function AnimSpan({ visible, config, duration = 700, delay = 0, children, style = {} }) {
+function AnimSpan({
+  visible,
+  config,
+  duration = 700,
+  delay = 0,
+  children,
+  style = {},
+}) {
   const spanStyle = {
     display: "inline-block",
     overflow: config.overflow === "hidden" ? "hidden" : "visible",
@@ -99,7 +112,8 @@ const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const isTouch = () =>
-  typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  typeof window !== "undefined" &&
+  ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
 /* isTypingTarget — true if focus is inside a field that should own arrow keys */
 const isTypingTarget = (el) => {
@@ -119,30 +133,30 @@ const isTypingTarget = (el) => {
 
 const PROJECTS = [
   {
-  id: 1,
-  title: "Resumate",
-  year: "2026",
-  role: "Full Stack AI Project",
-  desc: "An AI-powered full-stack resume builder and career platform featuring AI resume generation, ATS scoring, keyword matching, professional templates, PDF export, cover letter generation, interview preparation, authentication, and responsive user experiences.",
-  tags: [
-    "Next.js",
-    "React",
-    "JavaScript",
-    "Tailwind CSS",
-    "AI Integration",
-    "ATS Analysis",
-    "Authentication",
-    "PDF Generation",
-    "Framer Motion",
-    "GSAP",
-    "Lucide React",
-    "Full Stack",
-  ],
-  demo: "https://resumate-rouge-xi.vercel.app/",
-  code: "https://github.com/moazzam35/resume_bulider",
-  num: "02",
-  color: "#5B4B8A",
-},
+    id: 1,
+    title: "Resumate",
+    year: "2026",
+    role: "Full Stack AI Project",
+    desc: "An AI-powered full-stack resume builder and career platform featuring AI resume generation, ATS scoring, keyword matching, professional templates, PDF export, cover letter generation, interview preparation, authentication, and responsive user experiences.",
+    tags: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "Tailwind CSS",
+      "AI Integration",
+      "ATS Analysis",
+      "Authentication",
+      "PDF Generation",
+      "Framer Motion",
+      "GSAP",
+      "Lucide React",
+      "Full Stack",
+    ],
+    demo: "https://resumate-rouge-xi.vercel.app/",
+    code: "https://github.com/moazzam35/resume_bulider",
+    num: "02",
+    color: "#5B4B8A",
+  },
   {
     id: 2,
     title: "Aristocraft",
@@ -168,55 +182,8 @@ const PROJECTS = [
     num: "01",
     color: "#004b47",
   },
-{
-  id: 3,
-  title: "Roomora",
-  year: "2026",
-  role: "Full Stack project",
-  desc: "A full-stack hotel management and booking platform allowing users to browse rooms, view availability, select accommodations, and manage bookings, with an admin dashboard for room, reservation, and user management.",
-  tags: [
-    "Next.js",
-    "React",
-    "JavaScript",
-    "MongoDB",
-    "Tailwind CSS",
-    "Authentication",
-    "Authorization",
-    "Admin Dashboard",
-    "CRUD",
-    "Booking System",
-    "Full Stack",
-  ],
-  demo: "",
-  code: "https://github.com/moazzam35/Roomora",
-  num: "03",
-  color: "#B56B45",
-},{
-  id: 4,
-  title: "CareVista",
-  year: "2026",
-  role: "Full Stack project",
-  desc: "A full-stack hospital management system designed to streamline patient, doctor, and appointment management with role-based access, administrative workflows, database-backed CRUD operations, and a responsive admin dashboard.",
-  tags: [
-    "Next.js",
-    "React",
-    "JavaScript",
-    "MongoDB",
-    "Tailwind CSS",
-    "Authentication",
-    "RBAC",
-    "Admin Dashboard",
-    "CRUD",
-    "Appointment Management",
-    "Full Stack",
-  ],
-  demo: "",
-  code: "https://github.com/moazzam35/CareVista",
-  num: "04",
-  color: "#2F6B73",
-},
   {
-    id: 5,
+    id: 3,
     title: "Wheelzy",
     year: "2026",
     role: "Full Stack project",
@@ -238,6 +205,54 @@ const PROJECTS = [
     code: "https://github.com/moazzam35/wheelzy",
     num: "02",
     color: "#6366f1",
+  },
+  {
+    id: 4,
+    title: "Roomora",
+    year: "2026",
+    role: "Full Stack project",
+    desc: "A full-stack hotel management and booking platform allowing users to browse rooms, view availability, select accommodations, and manage bookings, with an admin dashboard for room, reservation, and user management.",
+    tags: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "MongoDB",
+      "Tailwind CSS",
+      "Authentication",
+      "Authorization",
+      "Admin Dashboard",
+      "CRUD",
+      "Booking System",
+      "Full Stack",
+    ],
+    demo: "",
+    code: "https://github.com/moazzam35/Roomora",
+    num: "03",
+    color: "#B56B45",
+  },
+  {
+    id: 5,
+    title: "CareVista",
+    year: "2026",
+    role: "Full Stack project",
+    desc: "A full-stack hospital management system designed to streamline patient, doctor, and appointment management with role-based access, administrative workflows, database-backed CRUD operations, and a responsive admin dashboard.",
+    tags: [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "MongoDB",
+      "Tailwind CSS",
+      "Authentication",
+      "RBAC",
+      "Admin Dashboard",
+      "CRUD",
+      "Appointment Management",
+      "Full Stack",
+    ],
+    demo: "",
+    code: "https://github.com/moazzam35/CareVista",
+    num: "04",
+    color: "#2F6B73",
   },
 
   {
@@ -287,13 +302,7 @@ const PROJECTS = [
     year: "2024",
     role: "Frontend Developer",
     desc: "Interactive country explorer powered by REST Countries API featuring live search, region filtering, routing, and dark mode.",
-    tags: [
-      "React.js",
-      "REST API",
-      "Data Fetching",
-      "Routing",
-      "Dark Mode",
-    ],
+    tags: ["React.js", "REST API", "Data Fetching", "Routing", "Dark Mode"],
     demo: "https://moazzam35.github.io/country-cards",
     code: "https://github.com/moazzam35/country-cards",
     num: "05",
@@ -306,13 +315,7 @@ const PROJECTS = [
     year: "2024",
     role: "Frontend Developer",
     desc: "A CRUD application featuring REST API integration, Axios, form validation, and efficient state-driven data management.",
-    tags: [
-      "React.js",
-      "Axios",
-      "REST API",
-      "CRUD Operations",
-      "Form Handling",
-    ],
+    tags: ["React.js", "Axios", "REST API", "CRUD Operations", "Form Handling"],
     demo: "https://moazzam35.github.io/crud/",
     code: "https://github.com/moazzam35/crud",
     num: "06",
@@ -325,13 +328,7 @@ const PROJECTS = [
     year: "2024",
     role: "Frontend Developer",
     desc: "An interactive Pokédex powered by PokéAPI with fast searching, filtering, responsive layouts, and optimized rendering for large datasets.",
-    tags: [
-      "React.js",
-      "PokéAPI",
-      "Search",
-      "Filtering",
-      "Performance",
-    ],
+    tags: ["React.js", "PokéAPI", "Search", "Filtering", "Performance"],
     demo: "https://moazzam35.github.io/pokemon-data/",
     code: "https://github.com/moazzam35/pokemon-data",
     num: "07",
@@ -343,27 +340,57 @@ const PROJECTS = [
    ICONS
    ════════════════════════════════════════════════════════════════ */
 
-const GitHubIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-  </svg>
-);
-
 const ArrowIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 14 14"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M2 7h10M8 3l4 4-4 4"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 const ChevronLeftIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M10 3L5 8l5 5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
 const ChevronRightIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M6 3l5 5-5 5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -376,19 +403,39 @@ const SectionHeader = () => {
 
   return (
     <div className="pc-header" ref={ref} id="projects">
-      <AnimSpan visible={visible} config={VARIANTS.slideRight} duration={600} delay={0}>
-        <p className="pc-header-eyebrow" style={{ margin: 0 }}>Selected work</p>
+      <AnimSpan
+        visible={visible}
+        config={VARIANTS.slideRight}
+        duration={600}
+        delay={0}
+      >
+        <p className="pc-header-eyebrow" style={{ margin: 0 }}>
+          Selected work
+        </p>
       </AnimSpan>
 
-      <AnimSpan visible={visible} config={VARIANTS.fadeUp} duration={800} delay={100} style={{ display: "block", overflow: "hidden" }}>
+      <AnimSpan
+        visible={visible}
+        config={VARIANTS.fadeUp}
+        duration={800}
+        delay={100}
+        style={{ display: "block", overflow: "hidden" }}
+      >
         <h1 className="pc-header-title" style={{ margin: 0 }}>
-          Projects I<br /><em>actually</em> built.
+          Projects I<br />
+          <em>actually</em> built.
         </h1>
       </AnimSpan>
 
-      <AnimSpan visible={visible} config={VARIANTS.fade} duration={700} delay={300}>
+      <AnimSpan
+        visible={visible}
+        config={VARIANTS.fade}
+        duration={700}
+        delay={300}
+      >
         <p className="pc-header-sub" style={{ margin: 0 }}>
-          No templates. No tutorials copy-pasted. Each one shipped, live, and battle-tested in the real world.
+          No templates. No tutorials copy-pasted. Each one shipped, live, and
+          battle-tested in the real world.
         </p>
       </AnimSpan>
     </div>
@@ -403,7 +450,12 @@ const TagList = ({ tags, visible, baseDelay = 0 }) => (
   <ul className="pc-tags" aria-label="Technologies">
     {tags.map((t, i) => (
       <li key={t} className="pc-tag">
-        <AnimSpan visible={visible} config={VARIANTS.pop} duration={350} delay={baseDelay + i * 45}>
+        <AnimSpan
+          visible={visible}
+          config={VARIANTS.pop}
+          duration={350}
+          delay={baseDelay + i * 45}
+        >
           {t}
         </AnimSpan>
       </li>
@@ -417,9 +469,10 @@ const TagList = ({ tags, visible, baseDelay = 0 }) => (
 
 const LIVE_BTN_COLOR = "#1a9e6e"; // ShopCraft accent — used for every "View live" button
 
-const ProjectActions = ({ demo, code, visible, delay = 0 }) => {
+const ProjectActions = ({ demo, visible, delay = 0 }) => {
   const liveRef = useRef(null);
-  const codeRef = useRef(null);
+  const previewRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const hoverIn = (ref, scale) => {
     if (isTouch() || !ref.current) return;
@@ -427,21 +480,33 @@ const ProjectActions = ({ demo, code, visible, delay = 0 }) => {
   };
   const hoverOut = (ref) => {
     if (isTouch() || !ref.current) return;
-    gsap.to(ref.current, { scale: 1, y: 0, duration: 0.35, ease: "power2.out" });
+    gsap.to(ref.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.35,
+      ease: "power2.out",
+    });
   };
 
-  return (
-    <div
-      className="pc-actions"
-      style={{
-        transition: visible
-          ? `opacity 500ms ${VARIANTS.fade.easing} ${delay}ms, transform 500ms ${VARIANTS.fadeUp.easing} ${delay}ms`
-          : "none",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0px)" : "translateY(10px)",
-      }}
-    >
-      {demo ? (
+  const handlePreview = (e) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    setTimeout(() => setLoading(false), 10000);
+  };
+
+  if (demo) {
+    return (
+      <div
+        className="pc-actions"
+        style={{
+          transition: visible
+            ? `opacity 500ms ${VARIANTS.fade.easing} ${delay}ms, transform 500ms ${VARIANTS.fadeUp.easing} ${delay}ms`
+            : "none",
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0px)" : "translateY(10px)",
+        }}
+      >
         <motion.a
           ref={liveRef}
           href={demo}
@@ -455,27 +520,42 @@ const ProjectActions = ({ demo, code, visible, delay = 0 }) => {
         >
           View live <ArrowIcon />
         </motion.a>
-      ) : (
-        <span className="pc-btn pc-btn--live pc-btn--disabled">No demo</span>
-      )}
-      {code ? (
-        <motion.a
-          ref={codeRef}
-          href={code}
-          target="_blank"
-          rel="noreferrer"
-          className="pc-btn pc-btn--code"
-          whileTap={{ scale: 0.93 }}
-          onMouseEnter={() => hoverIn(codeRef, 1.04)}
-          onMouseLeave={() => hoverOut(codeRef)}
-        >
-          <GitHubIcon /> Code
-        </motion.a>
-      ) : (
-        <span className="pc-btn pc-btn--code pc-btn--disabled" aria-disabled="true">
-          <GitHubIcon /> Private
-        </span>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="pc-actions"
+      style={{
+        transition: visible
+          ? `opacity 500ms ${VARIANTS.fade.easing} ${delay}ms, transform 500ms ${VARIANTS.fadeUp.easing} ${delay}ms`
+          : "none",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0px)" : "translateY(10px)",
+      }}
+    >
+      <motion.a
+        ref={previewRef}
+        href="#"
+        className={`pc-btn pc-btn--live pc-btn--preview${loading ? " pc-btn--loading" : ""}`}
+        style={{ background: LIVE_BTN_COLOR }}
+        whileTap={{ scale: loading ? 1 : 0.93 }}
+        onClick={handlePreview}
+        onMouseEnter={() => hoverIn(previewRef, 1.02)}
+        onMouseLeave={() => hoverOut(previewRef)}
+      >
+        {loading ? (
+          <span className="pc-btn-loading-text">
+            <span className="pc-btn-spinner" />
+            Preview is creating
+          </span>
+        ) : (
+          <>
+            View live <ArrowIcon />
+          </>
+        )}
+      </motion.a>
     </div>
   );
 };
@@ -486,7 +566,13 @@ const ProjectActions = ({ demo, code, visible, delay = 0 }) => {
 
 function getMetrics(width) {
   if (width <= 480) {
-    return { cardW: 78, cardH: 128, centerW: Math.min(width - 40, 300), centerH: 500, step: 44 };
+    return {
+      cardW: 78,
+      cardH: 128,
+      centerW: Math.min(width - 40, 300),
+      centerH: 500,
+      step: 44,
+    };
   }
   if (width <= 768) {
     return { cardW: 110, cardH: 168, centerW: 320, centerH: 480, step: 70 };
@@ -499,13 +585,15 @@ function getMetrics(width) {
 
 function useMetrics() {
   const [metrics, setMetrics] = useState(() =>
-    getMetrics(typeof window !== "undefined" ? window.innerWidth : 1200)
+    getMetrics(typeof window !== "undefined" ? window.innerWidth : 1200),
   );
   useEffect(() => {
     let raf = null;
     const onResize = () => {
       if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => setMetrics(getMetrics(window.innerWidth)));
+      raf = requestAnimationFrame(() =>
+        setMetrics(getMetrics(window.innerWidth)),
+      );
     };
     window.addEventListener("resize", onResize);
     return () => {
@@ -526,7 +614,9 @@ function useSwipeNav(ref, onPrev, onNext) {
 
     const down = (e) => {
       if (e.target.closest("a, button")) return;
-      s.down = true; s.dx = 0; s.startX = e.clientX;
+      s.down = true;
+      s.dx = 0;
+      s.startX = e.clientX;
       el.setPointerCapture?.(e.pointerId);
     };
     const move = (e) => {
@@ -553,7 +643,14 @@ function useSwipeNav(ref, onPrev, onNext) {
   }, [ref, onPrev, onNext]);
 }
 
-const CoverflowCard = ({ project, index, activeIndex, setActiveIndex, registerRef, metrics }) => {
+const CoverflowCard = ({
+  project,
+  index,
+  activeIndex,
+  setActiveIndex,
+  registerRef,
+  metrics,
+}) => {
   const isActive = index === activeIndex;
   const contentVisible = useRevealOnActive(isActive);
 
@@ -603,11 +700,14 @@ const CoverflowCard = ({ project, index, activeIndex, setActiveIndex, registerRe
               <p className="pc-cf-desc">{project.desc}</p>
             </AnimSpan>
 
-            <TagList tags={project.tags} visible={contentVisible} baseDelay={180} />
+            <TagList
+              tags={project.tags}
+              visible={contentVisible}
+              baseDelay={180}
+            />
 
             <ProjectActions
               demo={project.demo}
-              code={project.code}
               visible={contentVisible}
               delay={180 + project.tags.length * 45 + 80}
             />
@@ -644,7 +744,8 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
 
       const x = delta * metrics.step;
       const scale = active ? 1 : Math.max(0.66, 0.94 - abs * 0.09);
-      const opacity = abs > 5 ? 0 : active ? 1 : Math.max(0.32, 0.95 - abs * 0.16);
+      const opacity =
+        abs > 5 ? 0 : active ? 1 : Math.max(0.32, 0.95 - abs * 0.16);
       const blur = active ? 0 : Math.min(2.5, Math.max(0, (abs - 1) * 1.1));
       const rotateY = active ? 0 : dir * -Math.min(34, 10 + abs * 6);
       const z = -abs * 40;
@@ -691,17 +792,21 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
   useEffect(() => {
     const onKey = (e) => {
       if (isTypingTarget(document.activeElement)) return;
-      if (e.key === "ArrowRight") setActiveIndex((p) => Math.min(PROJECTS.length - 1, p + 1));
+      if (e.key === "ArrowRight")
+        setActiveIndex((p) => Math.min(PROJECTS.length - 1, p + 1));
       if (e.key === "ArrowLeft") setActiveIndex((p) => Math.max(0, p - 1));
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [setActiveIndex]);
 
-  const goPrev = useCallback(() => setActiveIndex((p) => Math.max(0, p - 1)), [setActiveIndex]);
+  const goPrev = useCallback(
+    () => setActiveIndex((p) => Math.max(0, p - 1)),
+    [setActiveIndex],
+  );
   const goNext = useCallback(
     () => setActiveIndex((p) => Math.min(PROJECTS.length - 1, p + 1)),
-    [setActiveIndex]
+    [setActiveIndex],
   );
   useSwipeNav(trackRef, goPrev, goNext);
 
@@ -735,11 +840,21 @@ const NavChevron = ({ dir, onClick, disabled }) => {
 
   const hoverIn = () => {
     if (isTouch() || disabled) return;
-    gsap.to(ref.current, { scale: 1.08, borderColor: "rgba(255,255,255,0.35)", duration: 0.28, ease: "power2.out" });
+    gsap.to(ref.current, {
+      scale: 1.08,
+      borderColor: "rgba(255,255,255,0.35)",
+      duration: 0.28,
+      ease: "power2.out",
+    });
   };
   const hoverOut = () => {
     if (isTouch()) return;
-    gsap.to(ref.current, { scale: 1, borderColor: "rgba(255,255,255,0.1)", duration: 0.32, ease: "power2.out" });
+    gsap.to(ref.current, {
+      scale: 1,
+      borderColor: "rgba(255,255,255,0.1)",
+      duration: 0.32,
+      ease: "power2.out",
+    });
   };
 
   return (
@@ -761,16 +876,23 @@ const NavChevron = ({ dir, onClick, disabled }) => {
 };
 
 const Controls = ({ activeIndex, setActiveIndex }) => {
-  const prev = useCallback(() => setActiveIndex((p) => Math.max(0, p - 1)), [setActiveIndex]);
+  const prev = useCallback(
+    () => setActiveIndex((p) => Math.max(0, p - 1)),
+    [setActiveIndex],
+  );
   const next = useCallback(
     () => setActiveIndex((p) => Math.min(PROJECTS.length - 1, p + 1)),
-    [setActiveIndex]
+    [setActiveIndex],
   );
 
   return (
     <>
       <NavChevron dir={-1} onClick={prev} disabled={activeIndex === 0} />
-      <NavChevron dir={1} onClick={next} disabled={activeIndex === PROJECTS.length - 1} />
+      <NavChevron
+        dir={1}
+        onClick={next}
+        disabled={activeIndex === PROJECTS.length - 1}
+      />
 
       <div className="pc-controls">
         <div className="pc-dots-nav">
@@ -801,7 +923,11 @@ const ProjectCoverflow = () => {
       <SectionHeader />
 
       <div className="pc-cf-wrap">
-        <CoverflowTrack activeIndex={activeIndex} setActiveIndex={setActiveIndex} metrics={metrics} />
+        <CoverflowTrack
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+          metrics={metrics}
+        />
         <Controls activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </div>
     </section>
