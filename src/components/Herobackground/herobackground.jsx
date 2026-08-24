@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, memo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import worldImg from "../../assets/images/world.png";
 import resizerImg from "../../assets/images/resizer.png";
@@ -592,15 +591,14 @@ function ConnectionPath({ conn }) {
   }, []);
 
   return (
-    <motion.path
+    <path
       ref={pathRef}
       d={`M ${conn.from.x} ${conn.from.y} L ${conn.to.x} ${conn.to.y}`}
       stroke={conn.color}
       strokeWidth="0.18"
       fill="none"
       vectorEffect="non-scaling-stroke"
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0, transition: { duration: 0.6 } }}
+      style={{ opacity: 0 }}
     />
   );
 }
@@ -629,11 +627,9 @@ function ConnectionLines({ pool, count, reduceMotion }) {
 
   return (
     <svg className="pointer-events-none absolute inset-0 h-full w-full" preserveAspectRatio="none">
-      <AnimatePresence>
-        {active.map((conn) => (
-          <ConnectionPath key={conn.id} conn={conn} />
-        ))}
-      </AnimatePresence>
+      {active.map((conn) => (
+        <ConnectionPath key={conn.id} conn={conn} />
+      ))}
     </svg>
   );
 }

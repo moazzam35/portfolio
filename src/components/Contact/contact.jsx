@@ -36,12 +36,20 @@ const SOCIALS = [
   },
 ];
 
-const Footer = () => {
+export default function Footer() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [honeypot, setHoneypot] = useState("");
   const [status, setStatus] = useState("idle");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Honeypot check: if filled, silently pretend success (bots only)
+    if (honeypot) {
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 4000);
+      return;
+    }
     setStatus("sending");
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -87,6 +95,19 @@ const Footer = () => {
           </div>
 
           <form className="footer-form" onSubmit={handleSubmit} aria-label="Contact form">
+            {/* Honeypot anti-spam field - hidden from real users */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0 }} tabIndex={-1}>
+              <label htmlFor="website">Leave this blank</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
             <input
               type="text"
               placeholder="Your Name"
@@ -147,6 +168,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

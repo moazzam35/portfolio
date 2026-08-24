@@ -1,6 +1,5 @@
 // SkillsSection.jsx
 import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -124,6 +123,16 @@ function SkillRow({ skill, index, registerRow }) {
   const percentRef = useRef(null);
 
   useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    const onEnter = () => gsap.to(el, { y: -3, duration: 0.3, ease: "power2.out" });
+    const onLeave = () => gsap.to(el, { y: 0, duration: 0.3, ease: "power2.out" });
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    return () => { el.removeEventListener("mouseenter", onEnter); el.removeEventListener("mouseleave", onLeave); };
+  }, []);
+
+  useEffect(() => {
     registerRow(index, {
       row: rowRef.current,
       fill: fillRef.current,
@@ -135,10 +144,8 @@ function SkillRow({ skill, index, registerRow }) {
   }, [index, registerRow, skill.level]);
 
   return (
-    <motion.div
+    <div
       ref={rowRef}
-      whileHover={{ y: -3 }}
-      transition={{ type: "spring", stiffness: 300, damping: 22 }}
       className="group flex items-center gap-4 rounded-2xl px-4 py-4 transition-colors duration-300 hover:bg-white/[0.035] sm:gap-5 sm:px-5"
     >
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-lime-400 transition-colors duration-300 group-hover:border-lime-400/30 group-hover:text-lime-300">
@@ -175,12 +182,14 @@ function SkillRow({ skill, index, registerRow }) {
           />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default function SkillsSection() {
   const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const containerRef = useRef(null);
   const rowsData = useRef(new Map());
 
   const registerRow = (index, data) => {
@@ -193,6 +202,14 @@ export default function SkillsSection() {
     ).matches;
 
     const ctx = gsap.context(() => {
+      gsap.from(headerRef.current, {
+        scrollTrigger: { trigger: headerRef.current, start: "top 85%", once: true },
+        opacity: 0, y: 24, duration: 0.7, ease: "power3.out",
+      });
+      gsap.from(containerRef.current, {
+        scrollTrigger: { trigger: containerRef.current, start: "top 85%", once: true },
+        opacity: 0, y: 16, duration: 0.6, delay: 0.1, ease: "power3.out",
+      });
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top 75%",
@@ -256,16 +273,11 @@ export default function SkillsSection() {
   return (
     <section
       ref={sectionRef}
+      id="skills"
       className="relative w-full bg-black px-6 py-16 sm:py-20 lg:py-24"
     >
       <div className="mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-14 sm:mb-16"
-        >
+        <div ref={headerRef} className="mb-14 sm:mb-16">
           <span className="mb-3 block text-xs font-medium uppercase tracking-[0.2em] text-lime-400/80">
             Skills
           </span>
@@ -276,15 +288,9 @@ export default function SkillsSection() {
             Technologies I use to design, build, and ship full-stack
             applications.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col divide-y divide-white/[0.06] rounded-3xl border border-white/[0.06] bg-white/[0.015] p-2 backdrop-blur-sm sm:p-3"
-        >
+        <div ref={containerRef} className="flex flex-col divide-y divide-white/[0.06] rounded-3xl border border-white/[0.06] bg-white/[0.015] p-2 backdrop-blur-sm sm:p-3">
           {SKILLS.map((skill, index) => (
             <SkillRow
               key={skill.name}
@@ -293,7 +299,7 @@ export default function SkillsSection() {
               registerRow={registerRow}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

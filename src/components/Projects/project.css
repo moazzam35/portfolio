@@ -369,18 +369,20 @@
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: #000;
-  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .pc-cf-chevron:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background: #111;
+  border-color: rgba(0, 0, 0, 0.25);
+  background: #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pc-cf-chevron:disabled {

@@ -112,8 +112,7 @@ export async function preloadImages(urls, { onProgress, priority = "high" } = {}
     )
   );
 
-  if (failedUrls.length > 0) {
-    // Loud in the console so broken assets are not silently hidden.
+  if (failedUrls.length > 0 && import.meta.env.DEV) {
     console.warn(`[preload] ${failedUrls.length}/${unique.length} images failed:`, failedUrls);
   }
 

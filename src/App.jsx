@@ -4,7 +4,6 @@ import Hero from "./components/Hero/hero-section";
 import HeroBackground from "./components/Herobackground/herobackground";
 import About from "./components/About/About";
 import "./App.css";
-import AOS from "aos";
 import Projects from "./components/Projects/projects";
 import { AnimatedBeamMultipleOutputDemo } from "./components/AnimatedBeam/animated-beam";
 import InfiniteScroll from "./components/Icon-animation/iconscrool";
@@ -18,14 +17,6 @@ import ScrollMarqueeHero from "./components/imagescrool/imagescrool";
 
 function App() {
   const [showPreloader, setShowPreloader] = useState(true);
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-    AOS.refresh();
-  }, []);
 
   const handlePreloaderComplete = () => {
     setShowPreloader(false);

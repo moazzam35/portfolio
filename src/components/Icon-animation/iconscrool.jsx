@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import AOS from "aos";
 import "./iconscrool.css";
 // Import your tech stack images
 import htmlImg from "../../assets/tech/html.png";
@@ -23,17 +21,10 @@ import reduxImg from "../../assets/tech/redux.png";
 import sqlImg from "../../assets/tech/sql.png";
 import vercelImg from "../../assets/tech/vercel.png";
 
-import "aos/dist/aos.css";
 
 
-function InfiniteScroll() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
 
+export default function InfiniteScroll() {
   const techStack1 = [
     { name: "HTML", image: htmlImg, color: "#E34F26" },
     { name: "CSS", image: cssImg, color: "#1572B6" },
@@ -61,8 +52,8 @@ function InfiniteScroll() {
   ];
 
   return (
-    <div className="tech-stack-section" id="skills">
-      <div className="tech-stack-header" data-aos="fade-up">
+    <div className="tech-stack-section" id="tech-stack">
+      <div className="tech-stack-header">
         <h2>Technologies & Tools</h2>
       </div>
 
@@ -97,4 +88,3 @@ function InfiniteScroll() {
   );
 }
 
-export default InfiniteScroll;

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { gsap } from "gsap";
 import "./Header.css";
 
 /* ─────────────────────────────────────
@@ -176,17 +176,9 @@ export default function Header() {
   const [open, setOpen]           = useState(false);
   const [scrolled, setScrolled]   = useState(false);
   const [active, setActive]       = useState("home");
-
-
-  // Framer Motion scroll progress
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 28,
-    restDelta: 0.001,
-  });
-  // dot position: 0% → 0vw, 1 → 100vw (clamped via CSS)
-  const dotLeft = useTransform(scaleX, [0, 1], ["0%", "100%"]);
+  const progBarRef = useRef(null);
+  const progDotRef = useRef(null);
+  const panelRef = useRef(null);
 
   const links = ["Home", "About", "Projects", "Reviews", "Contact"];
 
@@ -194,11 +186,19 @@ export default function Header() {
     "Available for work · Portfolio 2026 · Based in Pakistan · Front-end Developer · Creative Developer · ";
 
   useEffect(() => {
-    const fn = () => {
+    const onScroll = () => {
       setScrolled(window.scrollY > 30);
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0;
+      if (progBarRef.current) {
+        progBarRef.current.style.transform = `scaleX(${progress})`;
+      }
+      if (progDotRef.current) {
+        progDotRef.current.style.left = `${progress * 100}%`;
+      }
     };
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
 
@@ -206,6 +206,18 @@ export default function Header() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Close mobile menu on outside click
+  useEffect(() => {
+    if (!open) return;
+    const handleClick = (e) => {
+      if (panelRef.current && !panelRef.current.contains(e.target) && !e.target.closest(".hd-ham")) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, [open]);
 
   const handleNav = (label) => {
@@ -217,12 +229,12 @@ export default function Header() {
     <>
       {/* Scroll progress */}
       <div className="prog-track">
-        <motion.div className="prog-bar" style={{ scaleX }} />
-        <motion.div className="prog-dot" style={{ left: dotLeft }} />
+        <div className="prog-bar" ref={progBarRef} style={{ transformOrigin: "left" }} />
+        <div className="prog-dot" ref={progDotRef} />
       </div>
 
       {/* Mobile full-screen overlay */}
-      <div className={`hd-panel ${open ? "open" : ""}`}>
+      <div ref={panelRef} className={`hd-panel ${open ? "open" : ""}`}>
         <nav className="hd-links">
           {links.map((l, i) => (
             <a

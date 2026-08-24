@@ -4,10 +4,34 @@ import {
   useState,
   useCallback,
   useLayoutEffect,
+  memo,
 } from "react";
-import { motion } from "framer-motion";
 import gsap from "gsap";
 import "./Project.css";
+
+/* ════════════════════════════════════════════════════════════════
+   ANIMATION CONSTANTS
+   ════════════════════════════════════════════════════════════════ */
+const TAG_DELAY_MS = 45;
+const TAG_BASE_DELAY_MS = 180;
+const ACTION_BUFFER_MS = 80;
+const HOVER_SCALE_ACTIVE = 1.02;
+const HOVER_SCALE_PREVIEW = 1.02;
+const HOVER_Y_OFFSET = -1;
+const COVERFLOW_BLUR_PER_STEP = 1.1;
+const COVERFLOW_MAX_BLUR = 2.5;
+const COVERFLOW_MIN_SCALE = 0.66;
+const COVERFLOW_SCALE_STEP = 0.09;
+const COVERFLOW_OPACITY_STEP = 0.16;
+const COVERFLOW_MIN_OPACITY = 0.32;
+const COVERFLOW_DISTANT_OPACITY = 0.63;
+const COVERFLOW_MAX_ROTATE = 34;
+const COVERFLOW_ROTATE_BASE = 10;
+const COVERFLOW_ROTATE_STEP = 6;
+const COVERFLOW_Z_STEP = 40;
+const COVERFLOW_ANIM_DURATION = 0.85;
+const WHEEL_LOCK_MS = 380;
+const SWIPE_THRESHOLD = 42;
 
 /* ════════════════════════════════════════════════════════════════
    ANIMATION SYSTEM
@@ -453,8 +477,7 @@ const TagList = ({ tags, visible, baseDelay = 0 }) => (
         <AnimSpan
           visible={visible}
           config={VARIANTS.pop}
-          duration={350}
-          delay={baseDelay + i * 45}
+          duration={350}              delay={baseDelay + i * TAG_DELAY_MS}
         >
           {t}
         </AnimSpan>
@@ -476,7 +499,7 @@ const ProjectActions = ({ demo, visible, delay = 0 }) => {
 
   const hoverIn = (ref, scale) => {
     if (isTouch() || !ref.current) return;
-    gsap.to(ref.current, { scale, y: -1, duration: 0.3, ease: "power2.out" });
+    gsap.to(ref.current, { scale, y: HOVER_Y_OFFSET, duration: 0.3, ease: "power2.out" });
   };
   const hoverOut = (ref) => {
     if (isTouch() || !ref.current) return;
@@ -507,19 +530,20 @@ const ProjectActions = ({ demo, visible, delay = 0 }) => {
           transform: visible ? "translateY(0px)" : "translateY(10px)",
         }}
       >
-        <motion.a
+        <a
           ref={liveRef}
           href={demo}
           target="_blank"
           rel="noreferrer"
           className="pc-btn pc-btn--live"
           style={{ background: LIVE_BTN_COLOR }}
-          whileTap={{ scale: 0.93 }}
-          onMouseEnter={() => hoverIn(liveRef, 1.02)}
+          onMouseDown={() => { if (!isTouch() && liveRef.current) gsap.to(liveRef.current, { scale: 0.93, duration: 0.1 }); }}
+          onMouseUp={() => { if (!isTouch() && liveRef.current) gsap.to(liveRef.current, { scale: 1, duration: 0.2 }); }}
+          onMouseEnter={() => hoverIn(liveRef, HOVER_SCALE_ACTIVE)}
           onMouseLeave={() => hoverOut(liveRef)}
         >
           View live <ArrowIcon />
-        </motion.a>
+        </a>
       </div>
     );
   }
@@ -535,14 +559,15 @@ const ProjectActions = ({ demo, visible, delay = 0 }) => {
         transform: visible ? "translateY(0px)" : "translateY(10px)",
       }}
     >
-      <motion.a
+      <a
         ref={previewRef}
         href="#"
         className={`pc-btn pc-btn--live pc-btn--preview${loading ? " pc-btn--loading" : ""}`}
         style={{ background: LIVE_BTN_COLOR }}
-        whileTap={{ scale: loading ? 1 : 0.93 }}
+        onMouseDown={() => { if (!isTouch() && !loading && previewRef.current) gsap.to(previewRef.current, { scale: 0.93, duration: 0.1 }); }}
+        onMouseUp={() => { if (!isTouch() && previewRef.current) gsap.to(previewRef.current, { scale: 1, duration: 0.2 }); }}
         onClick={handlePreview}
-        onMouseEnter={() => hoverIn(previewRef, 1.02)}
+        onMouseEnter={() => hoverIn(previewRef, HOVER_SCALE_PREVIEW)}
         onMouseLeave={() => hoverOut(previewRef)}
       >
         {loading ? (
@@ -555,7 +580,7 @@ const ProjectActions = ({ demo, visible, delay = 0 }) => {
             View live <ArrowIcon />
           </>
         )}
-      </motion.a>
+      </a>
     </div>
   );
 };
@@ -609,8 +634,7 @@ function useSwipeNav(ref, onPrev, onNext) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const s = { down: false, startX: 0, dx: 0 };
-    const THRESHOLD = 42;
+    const s = { down: false, startX: 0, dx: 0 };      const THRESHOLD = SWIPE_THRESHOLD;
 
     const down = (e) => {
       if (e.target.closest("a, button")) return;
@@ -643,7 +667,7 @@ function useSwipeNav(ref, onPrev, onNext) {
   }, [ref, onPrev, onNext]);
 }
 
-const CoverflowCard = ({
+const CoverflowCard = memo(({
   project,
   index,
   activeIndex,
@@ -672,9 +696,10 @@ const CoverflowCard = ({
       }}
       onClick={() => !isActive && setActiveIndex(index)}
       onKeyDown={handleKeyDown}
-      role="button"
+      role="group"
+      aria-roledescription="slide"
       tabIndex={isActive ? -1 : 0}
-      aria-label={project.title}
+      aria-label={`${project.title}, ${isActive ? "current slide" : `slide ${index + 1} of ${PROJECTS.length}`}`}
       aria-current={isActive ? "true" : undefined}
     >
       <div className="pc-cf-card-inner">
@@ -709,7 +734,7 @@ const CoverflowCard = ({
             <ProjectActions
               demo={project.demo}
               visible={contentVisible}
-              delay={180 + project.tags.length * 45 + 80}
+              delay={TAG_BASE_DELAY_MS + project.tags.length * TAG_DELAY_MS + ACTION_BUFFER_MS}
             />
           </div>
         ) : (
@@ -720,7 +745,7 @@ const CoverflowCard = ({
       </div>
     </div>
   );
-};
+});
 
 const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
   const cardRefs = useRef([]);
@@ -743,12 +768,12 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
       const active = delta === 0;
 
       const x = delta * metrics.step;
-      const scale = active ? 1 : Math.max(0.66, 0.94 - abs * 0.09);
+      const scale = active ? 1 : Math.max(COVERFLOW_MIN_SCALE, 0.94 - abs * COVERFLOW_SCALE_STEP);
       const opacity =
-        abs > 5 ? 0 : active ? 1 : Math.max(0.32, 0.95 - abs * 0.16);
-      const blur = active ? 0 : Math.min(2.5, Math.max(0, (abs - 1) * 1.1));
-      const rotateY = active ? 0 : dir * -Math.min(34, 10 + abs * 6);
-      const z = -abs * 40;
+        active ? 1 : Math.max(COVERFLOW_DISTANT_OPACITY, 0.95 - abs * COVERFLOW_OPACITY_STEP);
+      const blur = active ? 0 : Math.min(COVERFLOW_MAX_BLUR, Math.max(0, (abs - 1) * COVERFLOW_BLUR_PER_STEP));
+      const rotateY = active ? 0 : dir * -Math.min(COVERFLOW_MAX_ROTATE, COVERFLOW_ROTATE_BASE + abs * COVERFLOW_ROTATE_STEP);
+      const z = -abs * COVERFLOW_Z_STEP;
       const zIndex = 100 - abs;
 
       gsap.to(el, {
@@ -759,7 +784,7 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
         opacity,
         zIndex,
         filter: `blur(${blur}px)`,
-        duration: reduced ? 0.01 : 0.85,
+        duration: reduced ? 0.01 : COVERFLOW_ANIM_DURATION,
         delay: reduced ? 0 : Math.min(abs * 0.025, 0.12),
         ease: "power4.out",
         pointerEvents: abs > 5 ? "none" : "auto",
@@ -782,7 +807,7 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
         const dir = e.deltaY > 0 ? 1 : -1;
         return Math.min(PROJECTS.length - 1, Math.max(0, prev + dir));
       });
-      setTimeout(() => (locked = false), 380);
+      setTimeout(() => (locked = false), WHEEL_LOCK_MS);
     };
     track.addEventListener("wheel", onWheel, { passive: false });
     return () => track.removeEventListener("wheel", onWheel);
@@ -815,6 +840,9 @@ const CoverflowTrack = ({ activeIndex, setActiveIndex, metrics }) => {
       ref={trackRef}
       className="pc-cf-track"
       style={{ perspective: "1400px", height: metrics.centerH + 40 }}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Projects"
     >
       {PROJECTS.map((project, i) => (
         <CoverflowCard
@@ -858,20 +886,20 @@ const NavChevron = ({ dir, onClick, disabled }) => {
   };
 
   return (
-    <motion.button
+    <button
       ref={ref}
       onClick={onClick}
       disabled={disabled}
       aria-label={dir === -1 ? "Previous project" : "Next project"}
       className={`pc-cf-chevron ${dir === -1 ? "pc-cf-chevron--left" : "pc-cf-chevron--right"}`}
-      whileTap={disabled ? {} : { scale: 0.9 }}
+      style={{ opacity: disabled ? 0.2 : 1, transition: "opacity 0.25s ease-out" }}
+      onMouseDown={() => { if (!isTouch() && !disabled && ref.current) gsap.to(ref.current, { scale: 0.9, duration: 0.1 }); }}
+      onMouseUp={() => { if (!isTouch() && ref.current) gsap.to(ref.current, { scale: 1, duration: 0.15 }); }}
       onMouseEnter={hoverIn}
       onMouseLeave={hoverOut}
-      animate={{ opacity: disabled ? 0.2 : 1 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
     >
       {dir === -1 ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-    </motion.button>
+    </button>
   );
 };
 

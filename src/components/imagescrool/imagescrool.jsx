@@ -1,11 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { useEffect, useRef, useState, memo } from "react";
 
 /* ─── COLOR PALETTE — change values here ─── */
 const COLORS = {
@@ -70,25 +63,30 @@ function useIsMobile() {
     typeof window !== "undefined" ? window.innerWidth < 640 : false
   );
   useEffect(() => {
-    const fn = () => setMobile(window.innerWidth < 640);
+    let raf = null;
+    const fn = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setMobile(window.innerWidth < 640));
+    };
     window.addEventListener("resize", fn);
-    return () => window.removeEventListener("resize", fn);
+    return () => {
+      window.removeEventListener("resize", fn);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
   return mobile;
 }
 
 /* ─── single marquee row ─── */
-function MarqueeRow({ items, speed, scrollY }) {
-  const x = useMotionValue(0);
-  const xSmooth = useSpring(x, { damping: 60, stiffness: 300, mass: 1 });
+function MarqueeRow({ items, speed }) {
+  const trackRef = useRef(null);
+  const baseXRef = useRef(0);
   const lastScrollRef = useRef(0);
-  const baseX = useRef(0);
-  const rafRef = useRef(null);
   const pausedRef = useRef(false);
+  const rafRef = useRef(null);
   const isMobile = useIsMobile();
 
-  /* card width + gap — matches Item sizing */
-  const ITEM_W = isMobile ? 148 : 210; // card width + 10px gap
+  const ITEM_W = isMobile ? 148 : 210;
 
   const pause = () => { pausedRef.current = true; };
   const resume = () => { pausedRef.current = false; };
@@ -98,15 +96,17 @@ function MarqueeRow({ items, speed, scrollY }) {
     const loop = (now) => {
       const dt = now - prev;
       prev = now;
-      if (!pausedRef.current) baseX.current += speed * dt * 0.04;
-      const sy = scrollY.get();
+      if (!pausedRef.current) baseXRef.current += speed * dt * 0.04;
+      const sy = window.scrollY;
       const delta = (sy - lastScrollRef.current) * speed * 1.8;
       lastScrollRef.current = sy;
-      baseX.current += delta;
+      baseXRef.current += delta;
       const half = (items.length * ITEM_W) / 2;
-      if (baseX.current < -half) baseX.current += half;
-      if (baseX.current > 0) baseX.current -= half;
-      x.set(baseX.current);
+      if (baseXRef.current < -half) baseXRef.current += half;
+      if (baseXRef.current > 0) baseXRef.current -= half;
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(${baseXRef.current}px, 0, 0)`;
+      }
       rafRef.current = requestAnimationFrame(loop);
     };
     rafRef.current = requestAnimationFrame(loop);
@@ -121,17 +121,17 @@ function MarqueeRow({ items, speed, scrollY }) {
       onTouchStart={pause}
       onTouchEnd={() => setTimeout(resume, 500)}
     >
-      <motion.div style={{ x: xSmooth }} className="flex gap-[10px]">
+      <div ref={trackRef} className="flex gap-[10px]" style={{ willChange: "transform" }}>
         {[...items, ...items].map((item, i) => (
           <Item key={i} item={item} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
 
 /* ─── individual item (text or card) ─── */
-function Item({ item }) {
+const Item = memo(function Item({ item }) {
   const [hov, setHov] = useState(false);
   const isMobile = useIsMobile();
 
@@ -180,17 +180,15 @@ function Item({ item }) {
   const isDarkCard = item.bg !== COLORS.yellowGreen && item.bg !== COLORS.lavender; // yellow-green & lavender are light bgs, rest are dark
 
   return (
-    <motion.div
-      onHoverStart={() => setHov(true)}
-      onHoverEnd={() => setHov(false)}
-      animate={{ scale: hov ? 1.04 : 1, rotate: hov ? -1 : 0 }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
       style={{
         flexShrink: 0,
         width: cardW,
         height: cardH,
         background: item.bg,
-        border: isDarkCard ? `1px solid ${item.accent}26` : "none", // 26 = ~15% opacity, matches each card's accent
+        border: isDarkCard ? `1px solid ${item.accent}26` : "none",
         borderRadius: 4,
         padding: isMobile ? "10px 12px" : "14px 16px",
         display: "flex",
@@ -199,9 +197,11 @@ function Item({ item }) {
         position: "relative",
         overflow: "hidden",
         cursor: "pointer",
+        transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease",
+        transform: hov ? "scale(1.04) rotate(-1deg)" : "scale(1) rotate(0)",
         boxShadow: hov
           ? isDarkCard
-            ? `0 8px 30px ${item.accent}1F` // glow color matches each card's accent
+            ? `0 8px 30px ${item.accent}1F`
             : "0 8px 30px rgba(232,255,58,0.25)"
           : "none",
       }}
@@ -247,8 +247,7 @@ function Item({ item }) {
         >
           {item.sub}
         </span>
-        <motion.div
-          animate={{ x: hov ? 3 : 0, y: hov ? -3 : 0 }}
+        <div
           style={{
             width: isMobile ? 18 : 22,
             height: isMobile ? 18 : 22,
@@ -259,19 +258,19 @@ function Item({ item }) {
             justifyContent: "center",
             opacity: 0.7,
             flexShrink: 0,
+            transition: "transform 0.3s ease",
+            transform: hov ? "translate(3px, -3px)" : "none",
           }}
         >
           <span style={{ color: item.accent, fontSize: isMobile ? 8 : 10, lineHeight: 1 }}>↗</span>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+});
 
 /* ─── main export ─── */
 export default function ScrollMarqueeHero() {
-  const { scrollY } = useScroll();
-
   return (
     <div
       className="h-auto py-24 sm:py-32"
@@ -312,7 +311,6 @@ export default function ScrollMarqueeHero() {
               key={row.id}
               items={row.items}
               speed={row.speed}
-              scrollY={scrollY}
             />
           ))}
         </div>
